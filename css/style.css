@@ -1,0 +1,24 @@
+header {
+    background-image: url(/assets/logo/main-screen-image.jpg);
+    object-fit: cover;
+    height: 670px;
+    background-position: center;
+    background-size: cover;
+}
+
+.logo {
+    padding: 50px 0px 0px 70px;
+}
+
+.main-paragraph {
+    color:#FFD15B;
+    font-size: 44px ;
+}
+
+.header-content {
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
