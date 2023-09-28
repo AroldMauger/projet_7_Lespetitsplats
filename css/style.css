@@ -96,8 +96,11 @@ header {
 }
 
 .input-search-filter {
-    padding-left: 17px;
     width: 85%;
+    outline: none;
+    height: 35px;
+    color:#7A7A7A;
+    font-family: 'Manrope' sans-serif;
 }
 
 .import {
@@ -107,8 +110,10 @@ header {
 .navigation-in-filter {
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-bottom: 25px;
-
+    border: 1px solid #C6C6C6;   
+    margin-inline: 17px;
 }
 
 .items-in-filter {
@@ -116,6 +121,8 @@ header {
     width: 100%;
     padding-left: 17px;
     padding-block: 13px;
+    font-family: 'Manrope' sans-serif;
+
 }
 
 /* TAGS */
@@ -139,6 +146,15 @@ header {
 .bi-x-lg {
     cursor: pointer;
 }
+.bi-x-lg:hover {
+    color:white;
+    background-color: black;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    width: 20px;
+}
+
 /*CARDS */
 .cards-container {
     display: flex;
