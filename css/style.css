@@ -1,9 +1,15 @@
+main {
+    background-color: #EDEDED;
+    padding-top: 20px;
+
+}
 header {
     background-image: url(/assets/logo/main-screen-image.jpg);
     object-fit: cover;
     height: 670px;
     background-position: center;
-    background-size: cover;
+    background-size:cover;
+    filter: brightness(80%);
 }
 
 .logo {
@@ -12,7 +18,8 @@ header {
 
 .main-paragraph {
     color:#FFD15B;
-    font-size: 44px ;
+    font-size: 48px ;
+    font-family: 'Anton', sans-serif;
 }
 
 .header-content {
@@ -32,4 +39,62 @@ header {
     align-items: center;
     justify-content: space-between;
     height: 70px;
+}
+
+.nav-bar-container {
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar {
+    display: flex;
+    gap: 65px;
+}
+
+.nav-bar button {
+    display: flex;
+    justify-content: space-between;
+    padding : 17px;
+}
+.total-recipes {
+    font-family: 'Anton', sans-serif;
+    font-size: 21px;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:48px;
+    padding-top: 55px;
+}
+
+.clickable-card {
+    display: inline-block;
+    width: 380px;
+    height: 730px;
+    text-decoration: none;
+    color:black;
+}
+
+.recipe-image {
+    width: 380px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.recipe-description {
+    height: 100px;
+    overflow: hidden;
+}
+
+.ingredients-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:18px;
+
+}
+.ingredient-and-quantity {
+    display: flex;
+    flex-direction: column;
 }
