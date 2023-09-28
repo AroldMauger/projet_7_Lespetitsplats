@@ -1,11 +1,11 @@
 import { recipes } from "./recipes.js"
 
 
- function displayData() {
+
+ function displayData(recipesToShow) {
 	const cardContainer = document.querySelector(".cards-container");
 
-	recipes.forEach((recipe) => {
-        if(recipe.id <=10) {
+	recipes.slice(0, recipesToShow).forEach((recipe) => {
             const clickableCard = document.createElement("a");
             clickableCard.classList.add("clickable-card");
 
@@ -76,7 +76,8 @@ import { recipes } from "./recipes.js"
             textInRecipeContainer.appendChild(sectionIngredients);
             textInRecipeContainer.appendChild(ingredientsContainer);
 
-        }
-	});
-}
-displayData()
+        })
+	};
+
+
+displayData(10);

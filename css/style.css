@@ -29,9 +29,17 @@ header {
     justify-content: center;
 }
 
+#search-recipe {
+    height: 100%;
+    padding:15px;
+}
+
 .btn-search {
     width: 50px;
     height: 50px;
+}
+.search-bar {
+    padding-left :0px;
 }
 .search-bar div{
     display: flex;
@@ -48,19 +56,80 @@ header {
 
 .nav-bar {
     display: flex;
-    gap: 65px;
+    gap: 90px;
 }
 
 .nav-bar button {
     display: flex;
     justify-content: space-between;
-    padding : 17px;
+    font-family: 'Manrope';
 }
 .total-recipes {
     font-family: 'Anton', sans-serif;
     font-size: 21px;
+    
 }
 
+
+/* FILTERS INGREDIENTS*/
+
+.rotate{
+    transform: rotate(180deg);
+}
+
+.filter-for-ingredients {
+    position: relative;
+    padding : 0px;
+}
+.ingredient-button {
+    width: 100%;
+    padding:17px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.search-ingredient-in-filter {
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    padding-left:17px;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.search-in-filter {
+    display: flex;
+}
+
+.import-ingredients {
+    height:222px;
+}
+
+.navigation-in-filter {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+}
+/* FILTERS INGREDIENTS*/
+.search-appliance-in-filter {
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    padding-left:17px;
+    border-radius: 0px 0px 15px 15px;
+}
+.import-appliances {
+    height:222px;
+}
+.filter-for-appliances {
+    position: relative;
+    padding : 0px;
+}
+.appliance-button {
+    width: 100%;
+    padding:17px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+/*CARDS */
 .cards-container {
     display: flex;
     flex-direction: row;
@@ -103,6 +172,7 @@ header {
     overflow: hidden;
     margin-top: 15px;
     margin-bottom: 30px;
+    font-family: 'Manrope';
 
 }
 

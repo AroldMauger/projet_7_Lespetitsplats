@@ -19,8 +19,8 @@
                 <p class="main-paragraph text-center p-0">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</p>
             </div>
             <div class="container bg-white search-bar col-7 offset-2 rounded">
-                <div class="container p-0">
-                    <input class="border-0 w-100" type="search" id="search-recipe" placeholder="Rechercher une recette, un ingrédient...">
+                <div class="container p-0 rounded">
+                    <input class="border-0 w-100 rounded" type="search" id="search-recipe" placeholder="Rechercher une recette, un ingrédient...">
                     <button class="btn-search bg-black text-light border-0 rounded">                
                         <i class="bi bi-search"></i>
                     </button>
@@ -33,20 +33,54 @@
     <main>
         <div class="nav-bar-container container-fluid">
             <nav class="nav-bar container row offset-1">
-                <button class="col-2 bg-white border-0 rounded">
-                    <span>Ingredients</span>
-                    <i class="bi bi-chevron-down"></i>
-                </button>
-                <button class="col-2 bg-white border-0 rounded">
-                    <span>Appareils</span>
-                    <i class="bi bi-chevron-down"></i>
-                </button>
-                <button class="col-2 bg-white border-0 rounded">
-                    <span>Ustensiles</span>
-                    <i class="bi bi-chevron-down"></i>
-                </button>
+                <div class="filter-for-ingredients col-3">
+                    <button class="ingredient-button w-100 bg-white border-0">
+                        <span>Ingredients</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="search-ingredient-in-filter bg-white" style="display:none">
+                        <div class="navigation-in-filter">
+                            <input class="border-0" type="search" id="search-ingredient" placeholder="Rechercher">
+                            <i class="bi bi-search bg-white"></i>
+                        </div>
+                        <div class="import-ingredients">
+                            <!-- IMPORTER LA LISTE DES INGRÉDIENTS-->
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-for-appliances col-3">
+                    <button class="appliance-button w-100 bg-white border-0">
+                        <span>Appareils</span>
+                        <i class="bi bi-chevron-down appliance-chevron"></i>
+                    </button>
+                    <div class="search-appliance-in-filter bg-white" style="display:none">
+                        <div class="navigation-in-filter">
+                            <input class="border-0" type="search" id="search-ingredient" placeholder="Rechercher">
+                            <i class="bi bi-search bg-white"></i>
+                        </div>
+                        <div class="import-appliances">
+                            <!-- IMPORTER LA LISTE DES APPAREILS-->
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-for-ingredients col-3">
+                    <button class="ingredient-button w-100 bg-white border-0">
+                        <span>Ustensiles</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="search-ingredient-in-filter bg-white" style="display:none">
+                        <div class="navigation-in-filter">
+                            <input class="border-0" type="search" id="search-ingredient" placeholder="Rechercher">
+                            <i class="bi bi-search bg-white"></i>
+                        </div>
+                        <div class="import-ingredients">
+                            <!-- IMPORTER LA LISTE DES USTENSILES-->
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="total-recipes col-2 offset-1 text-end">1500 recettes</p>
             </nav>
-            <p class="total-recipes col-2 text-end">1500 recettes</p>
         </div>
         <section class="cards-container container-fluid offset-1">
            
@@ -55,6 +89,8 @@
     </main>
     <script type="module" src="/scripts/recipes.js"></script>
     <script type="module" src="/scripts/main.js"></script>
+    <script type="module" src="/scripts/filters.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 </html>
