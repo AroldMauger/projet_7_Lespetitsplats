@@ -13,11 +13,19 @@ import { recipes } from "./recipes.js"
             recipeImage.setAttribute("src", `assets/images/${recipe.image}`);
             recipeImage.classList.add("recipe-image");
 
+            const textInRecipeContainer = document.createElement("div");
+            textInRecipeContainer.classList.add("text-in-recipe-container");
+
+
             const recipeName = document.createElement("h2");
             recipeName.textContent = recipe.name;
+            recipeName.classList.add("recipe-name");
+
 
             const sectionRecipe = document.createElement("span");
             sectionRecipe.textContent = "RECETTE";
+            sectionRecipe.classList.add("section-in-recipe");
+
 
             const recipeDescription = document.createElement("p");
             recipeDescription.textContent = recipe.description;
@@ -26,6 +34,8 @@ import { recipes } from "./recipes.js"
     
             const sectionIngredients = document.createElement("span");
             sectionIngredients.textContent = "INGRÉDIENTS";
+            sectionIngredients.classList.add("section-in-recipe");
+
 
             const ingredientsContainer = document.createElement("div");
             ingredientsContainer.classList.add("ingredients-container");
@@ -40,26 +50,31 @@ import { recipes } from "./recipes.js"
 
             const ingredientName = document.createElement("span");
             ingredientName.textContent = ingredientList.ingredient;
+            ingredientName.classList.add("ingredient-name");
 
             const quantity = document.createElement("span");
-            quantity.textContent = ingredientList.quantity + ingredientList.unit;
+            quantity.classList.add("quantity");
 
+            if(ingredientList.quantity != null && ingredientList.unit!= null) {
+                quantity.textContent = ingredientList.quantity+ " " +ingredientList.unit;
+                } 
+                else { quantity.textContent = ingredientList.quantity;
+                }
+                ingredientsContainer.appendChild(ingredientAndQuantity);
+                ingredientAndQuantity.appendChild(ingredientName);
+                ingredientAndQuantity.appendChild(quantity);
 
-            ingredientsContainer.appendChild(ingredientAndQuantity);
-            ingredientAndQuantity.appendChild(ingredientName);
-            ingredientAndQuantity.appendChild(quantity);
 
             });
 
             cardContainer.appendChild(clickableCard);
             clickableCard.appendChild(recipeImage);
-            clickableCard.appendChild(recipeName);
-            clickableCard.appendChild(sectionRecipe);
-            clickableCard.appendChild(recipeDescription);
-            clickableCard.appendChild(sectionIngredients);
-            clickableCard.appendChild(ingredientsContainer);
-
-           
+            clickableCard.appendChild(textInRecipeContainer);
+            textInRecipeContainer.appendChild(recipeName);
+            textInRecipeContainer.appendChild(sectionRecipe);
+            textInRecipeContainer.appendChild(recipeDescription);
+            textInRecipeContainer.appendChild(sectionIngredients);
+            textInRecipeContainer.appendChild(ingredientsContainer);
 
         }
 	});
