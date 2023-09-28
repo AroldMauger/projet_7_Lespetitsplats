@@ -52,6 +52,7 @@ uniqueIngredientsArray.forEach((ingredient) => {
     searchIngredientFilter.style.display = "none";
     chevronDown.classList.remove("rotate");  
     buttonIngredients.style.borderRadius  = "15px 15px 15px 15px";
+
     const allTagsContainer = document.querySelector(".all-tags-container");
     const tagContainer = document.createElement("div");
     tagContainer.classList.add("tag");
@@ -68,7 +69,32 @@ uniqueIngredientsArray.forEach((ingredient) => {
     tagContainer.appendChild(closeTagIngredient)
     allTagsContainer.appendChild(tagContainer)
 });
+
+
+const ingredientFilterInput = document.getElementById('search-ingredient');     // ici on vise l'input dans le HTML
+const ingredientItems = document.querySelectorAll('.items-in-filter');
+
+ingredientFilterInput.addEventListener('input', (event) => {
+  const filterText = removeAccents(event.target.value.toLowerCase());           // ici, le texte qu'on écrit dans l'input sans accent
+                                                                                // ToLowerCase() nous permet de comparer l'input et les ingrédients avec la même casse
+  ingredientItems.forEach((ingredientItem) => { 
+    const ingredientName = removeAccents(ingredientItem.textContent.toLowerCase()); // ici, l'ingrédient dans la liste sans accent
+
+    if (ingredientName.includes(filterText)) {
+      ingredientItem.style.display = 'block'; 
+    } else {
+      ingredientItem.style.display = 'none'; 
+    }
+  });
 });
+});
+
+// FONCTION POUR NORMALISER LES CARACTERES RECHERCHÉS DANS L'INPUT SANS ACCENTS
+function removeAccents(str) {
+    return str
+      .normalize("NFD") 
+      .replace(/[\u0300-\u036f]/g, ""); 
+  }
 
 /*
 // AFFICHAGE DE TOUS LES APPAREILS A LA SUITE

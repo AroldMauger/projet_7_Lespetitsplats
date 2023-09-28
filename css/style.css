@@ -91,7 +91,7 @@ header {
 .search-in-filter {
     z-index: 1;
     position: absolute;
-    overflow: hidden;
+    overflow:scroll;
     border-radius: 0px 0px 15px 15px;
 }
 
