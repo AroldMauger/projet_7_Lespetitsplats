@@ -47,6 +47,27 @@ uniqueIngredientsArray.forEach((ingredient) => {
   ingredientElement.addEventListener('mouseout', () => {
     ingredientElement.style.backgroundColor = 'transparent';
   });
+
+  ingredientElement.addEventListener('click', () => {
+    searchIngredientFilter.style.display = "none";
+    chevronDown.classList.remove("rotate");  
+    buttonIngredients.style.borderRadius  = "15px 15px 15px 15px";
+    const allTagsContainer = document.querySelector(".all-tags-container");
+    const tagContainer = document.createElement("div");
+    tagContainer.classList.add("tag");
+
+    const tagIngredient = document.createElement("span");
+    tagIngredient.textContent = ingredient;
+    const closeTagIngredient = document.createElement("span");
+    closeTagIngredient.classList.add("bi-x-lg");
+    closeTagIngredient.addEventListener("click", function(){
+    tagContainer.style.display ="none";
+    })
+
+    tagContainer.appendChild(tagIngredient)
+    tagContainer.appendChild(closeTagIngredient)
+    allTagsContainer.appendChild(tagContainer)
+});
 });
 
 /*

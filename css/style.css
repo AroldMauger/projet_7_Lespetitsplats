@@ -118,7 +118,27 @@ header {
     padding-block: 13px;
 }
 
+/* TAGS */
 
+.all-tags-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 21px;
+    gap:20px;
+}
+
+.tag {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFD15B;
+    padding: 18px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.bi-x-lg {
+    cursor: pointer;
+}
 /*CARDS */
 .cards-container {
     display: flex;
