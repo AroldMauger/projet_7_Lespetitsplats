@@ -52,6 +52,7 @@ header {
 .nav-bar-container {
     display: flex;
     align-items: center;
+    flex-direction: row;
 }
 
 .nav-bar {
@@ -77,57 +78,46 @@ header {
     transform: rotate(180deg);
 }
 
-.filter-for-ingredients {
+.filter {
     position: relative;
     padding : 0px;
 }
-.ingredient-button {
+.button-in-filter {
     width: 100%;
     padding:17px;
-    border-radius: 15px 15px 0px 0px;
-}
-
-.search-ingredient-in-filter {
-    z-index: 1;
-    position: absolute;
-    overflow: hidden;
-    padding-left:17px;
-    border-radius: 0px 0px 15px 15px;
+    border-radius: 15px ;
 }
 
 .search-in-filter {
-    display: flex;
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 0px 0px 15px 15px;
 }
 
-.import-ingredients {
-    height:222px;
+.input-search-filter {
+    padding-left: 17px;
+    width: 85%;
+}
+
+.import {
+    height:250px;
 }
 
 .navigation-in-filter {
     display: flex;
     flex-direction: row;
     margin-bottom: 25px;
+
 }
-/* FILTERS INGREDIENTS*/
-.search-appliance-in-filter {
-    z-index: 1;
-    position: absolute;
-    overflow: hidden;
-    padding-left:17px;
-    border-radius: 0px 0px 15px 15px;
-}
-.import-appliances {
-    height:222px;
-}
-.filter-for-appliances {
-    position: relative;
-    padding : 0px;
-}
-.appliance-button {
+
+.items-in-filter {
+    display: inline-block;
     width: 100%;
-    padding:17px;
-    border-radius: 15px 15px 0px 0px;
+    padding-left: 17px;
+    padding-block: 13px;
 }
+
 
 /*CARDS */
 .cards-container {
