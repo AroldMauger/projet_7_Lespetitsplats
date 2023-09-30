@@ -71,6 +71,9 @@ header {
     
 }
 
+.borderR {
+    border-radius: 15px;
+}
 
 /* FILTERS INGREDIENTS*/
 
