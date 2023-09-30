@@ -34,13 +34,13 @@
         <div class="nav-bar-container container-fluid">
             <nav class="nav-bar container row offset-1">
                 <div class="filter col-2">
-                    <button class="ingredient-button w-100 bg-white border-0 button-in-filter">
+                    <button class="buttons ingredient-button w-100 bg-white border-0 button-in-filter" id="button-ingredient">  
                         <span>Ingrédients</span>
                         <i class="bi bi-chevron-down"></i>
                     </button>
                     <div class="search-in-filter bg-white" style="display:none">
                         <div class="navigation-in-filter">
-                            <input class="border-0 input-search-filter" type="search" id="search-ingredient">
+                            <input class="border-0 input-search-filter" type="search">
                             <i class="bi bi-x-lg bg-white close-in-search" style="display:none"></i>
                             <i class="bi bi-search bg-white"></i>
                         </div>
@@ -53,33 +53,41 @@
                     </div>
                 </div>
                 <div class="filter col-2">
-                    <button class="appliance-button w-100 bg-white border-0 button-in-filter">
+                    <button class="buttons appliance-button w-100 bg-white border-0 button-in-filter" id="button-appliances">
                         <span>Appareils</span>
                         <i class="bi bi-chevron-down"></i>
                     </button>
                     <div class="search-in-filter bg-white" style="display:none">
                         <div class="navigation-in-filter">
-                            <input class="border-0 input-search-filter" type="search" id="search-ingredient" placeholder="Rechercher">
+                            <input class="border-0 input-search-filter" type="search">
+                            <i class="bi bi-x-lg bg-white close-in-search" style="display:none"></i>
                             <i class="bi bi-search bg-white"></i>
                         </div>
                         <div class="import-appliances import">
                             <!-- IMPORTER LA LISTE DES APPAREILS-->
                         </div>
                     </div>
+                    <div class="all-tags-container">
+                        <!-- IMPORTER LES TAGS -->
+                    </div>
                 </div>
                 <div class="filter col-2">
-                    <button class="ustensiles-button w-100 bg-white border-0 button-in-filter">
+                    <button class="buttons ustensiles-button w-100 bg-white border-0 button-in-filter" id="button-ustensiles">
                         <span>Ustensiles</span>
                         <i class="bi bi-chevron-down"></i>
                     </button>
                     <div class="search-in-filter bg-white" style="display:none">
                         <div class="navigation-in-filter">
-                            <input class="border-0 input-search-filter" type="search" id="search-ingredient" placeholder="Rechercher">
+                            <input class="border-0 input-search-filter" type="search">
+                            <i class="bi bi-x-lg bg-white close-in-search" style="display:none"></i>
                             <i class="bi bi-search bg-white"></i>
                         </div>
                         <div class="import-ustensiles import">
                             <!-- IMPORTER LA LISTE DES USTENSILES-->
                         </div>
+                    </div>
+                    <div class="all-tags-container">
+                        <!-- IMPORTER LES TAGS -->
                     </div>
                 </div>
                 
