@@ -143,16 +143,29 @@ header {
     width: 200px;
 }
 
-.bi-x-lg {
+.close-tag-button {
     cursor: pointer;
 }
-.bi-x-lg:hover {
+.close-tag-button:hover {
     color:white;
     background-color: black;
     border-radius: 50%;
     display: grid;
     place-items: center;
     width: 20px;
+}
+
+.close-in-search {
+    font-size: 12px;
+    margin-right: 10px;
+    color: grey;
+    cursor: pointer;
+}
+
+.bi-search {
+    margin-right: 10px;
+    color: grey;
+    font-size: 14px;
 }
 
 /*CARDS */
