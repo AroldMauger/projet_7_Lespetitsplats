@@ -1,5 +1,5 @@
 import { recipes } from "./recipes.js";
-import { displayAllRecipes, createRecipeCard } from "./main.js";
+import { displayFirstTenRecipes, createRecipeCard } from "./main.js";
 import {
   displayAllIngredients,
   displayAllAppliances,
@@ -29,7 +29,7 @@ searchInput.addEventListener("input", function () {
   }
   if (searchText === "") {
     cardContainer.innerHTML = "";
-    displayAllRecipes();
+    displayFirstTenRecipes();
     importIngredientsContainer.innerHTML = "";
     importAppliancesContainer.innerHTML = "";
     importUstensilesContainer.innerHTML = "";

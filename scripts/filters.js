@@ -1,4 +1,6 @@
 import { recipes } from "./recipes.js";
+import { generateTag } from "./tags.js";
+
 
 // OUVERTURE - FERMETURE DU FILTRE INGREDIENTS//
 
@@ -139,7 +141,7 @@ export function displayAllUstensiles() {
 }
 // ----------------------------------------------------------------- //
 
-// FONCTION POUR AFFICHER LES CONTENUS DE CHAQUE FILTRE //
+// --------------FONCTION POUR AFFICHER LES CONTENUS DE CHAQUE FILTRE  ------------//
 
 export function displayItemsInFilter(item, importContainer, allTagsContainer) {
   const itemElement = document.createElement("span");
@@ -148,8 +150,9 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
 
   importContainer.appendChild(itemElement);
 
+  // GESTION DU SURVOL ET FOND JAUNE
+
   itemElement.addEventListener("mouseover", () => {
-    // GESTION DU SURVOL ET FOND JAUNE
     itemElement.style.backgroundColor = "#FFD15B";
   });
 
@@ -158,39 +161,15 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
   });
 
   // CREATION D'UN TAG AU CLIC SUR UN ITEM
-  itemElement.addEventListener("click", () => {
-    const allFilters = document.querySelectorAll(".search-in-filter"); // On ferme le filtre après le clic
-    allFilters.forEach((filter) => {
-      const buttons = document.querySelectorAll(".buttons");
-      filter.style.display = "none";
 
-      buttons.forEach((button) => {
-        button.style.borderRadius = "15px 15px 15px 15px"; // On ajoute un borderRadius au bouton filtre
-      });
-    });
-
-    const tagContainer = document.createElement("div");
-    tagContainer.classList.add("tag");
-
-    const tagName = document.createElement("span");
-    tagName.textContent = item; // => ici on génère un tag avec le nom de l'item cliqué
-    // C'est ici qu'il faut faire l'appel à la fonction principale et filtrer
-
-    const closeTag = document.createElement("span");
-    closeTag.classList.add("bi-x-lg");
-    closeTag.classList.add("close-tag-button");
-
-    closeTag.addEventListener("click", function () {
-      // On supprime le tag au clic sur la croix
-      tagContainer.remove();
-    });
-
-    tagContainer.appendChild(tagName);
-    tagContainer.appendChild(closeTag);
-    allTagsContainer.appendChild(tagContainer);
+  itemElement.addEventListener("click", function()  {
+    generateTag(item, allTagsContainer);
   });
+
 }
 // ----------------------------------------------------------------- //
+
+
 
 // FONCTION POUR FILTRER LES NOMS DES INGREDIENTS EN FONCTION DE CE QU'ECRIT L'UTILISATEUR DANS LA BARRE DE RECHERCHE
 export function filterIngredientsFromInput() {
