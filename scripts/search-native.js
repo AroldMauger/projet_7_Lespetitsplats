@@ -137,6 +137,9 @@ export function searchRecipes() {
       updateIngredientFilter(filteredRecipes)
       updateApplianceFilter(filteredRecipes)
       updateUstensileFilter(filteredRecipes)
+      filterIngredientsFromInput();
+      filterAppliancesFromInput();
+      filterUstensilesFromInput();
 
     });
   });
@@ -196,6 +199,9 @@ function searchRecipesFromApplianceTag(searchResults) {
       updateIngredientFilter(filteredRecipes)
       updateApplianceFilter(filteredRecipes)
       updateUstensileFilter(filteredRecipes)
+      filterIngredientsFromInput();
+      filterAppliancesFromInput();
+      filterUstensilesFromInput();
     });
   });
 }
@@ -254,6 +260,9 @@ function searchRecipesFromUstensileTag(searchResults) {
       updateIngredientFilter(filteredRecipes)
       updateApplianceFilter(filteredRecipes)
       updateUstensileFilter(filteredRecipes)
+      filterIngredientsFromInput();
+      filterAppliancesFromInput();
+      filterUstensilesFromInput();
     });
   });
 }
