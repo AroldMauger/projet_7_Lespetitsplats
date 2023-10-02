@@ -135,6 +135,9 @@ export function searchRecipes() {
       // On supprime l'élément cliqué de la liste des ingrédients
       itemIngredient.remove();
       updateIngredientFilter(filteredRecipes)
+      updateApplianceFilter(filteredRecipes)
+      updateUstensileFilter(filteredRecipes)
+
     });
   });
 }
@@ -190,7 +193,9 @@ function searchRecipesFromApplianceTag(searchResults) {
 
       // On supprime l'élément cliqué de la liste des ingrédients
       itemAppliance.remove();
+      updateIngredientFilter(filteredRecipes)
       updateApplianceFilter(filteredRecipes)
+      updateUstensileFilter(filteredRecipes)
     });
   });
 }
@@ -246,6 +251,8 @@ function searchRecipesFromUstensileTag(searchResults) {
 
       // On supprime l'élément cliqué de la liste des ingrédients
       itemUstensile.remove();
+      updateIngredientFilter(filteredRecipes)
+      updateApplianceFilter(filteredRecipes)
       updateUstensileFilter(filteredRecipes)
     });
   });
