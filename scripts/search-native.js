@@ -1,5 +1,7 @@
 import { recipes } from "./recipes.js";
 import { displayFirstTenRecipes, createRecipeCard } from "./main.js";
+
+
 import {
   displayAllIngredients,
   displayAllAppliances,
@@ -33,13 +35,15 @@ searchInput.addEventListener("input", function () {
     importIngredientsContainer.innerHTML = "";
     importAppliancesContainer.innerHTML = "";
     importUstensilesContainer.innerHTML = "";
+    /*
     displayAllIngredients();
     displayAllAppliances();
     displayAllUstensiles();
+    */
   }
 });
 // ------- -FONCTION POUR FILTRER LES RECETTES EN FONCTION DU TEXTE DANS LA BARRE DE RECHERCHE ---------
-function searchRecipes() {
+export function searchRecipes() {
   let recipesCards = 0;
   let searchResults = [];
 
@@ -81,21 +85,7 @@ function searchRecipes() {
       const clickableCard = createRecipeCard(recipe); // On crée une carte recette pour chaque recette
       cardContainer.appendChild(clickableCard);
     });
-    // ---- AFFICHAGE DES ITEMS INGREDIENTS DANS LE FILTRE -------- //
-    const listFilteredIngredients = new Set();
-    searchResults.forEach((recipe) => {
-      recipe.ingredients.forEach((ingredientList) => {
-        listFilteredIngredients.add(ingredientList.ingredient.toLowerCase());
-      });
-    });
-    const uniqueIngredientsArray = Array.from(listFilteredIngredients);
-    const allTagsIngredients = document.querySelector(".tags-ingredients");
-
-    uniqueIngredientsArray.forEach((item) => {
-      const importContainer = document.querySelector(".import-ingredients");
-
-      displayItemsInFilter(item, importContainer, allTagsIngredients);
-    });
+    updateIngredientFilter(searchResults)
     filterIngredientsFromInput();
     // ---------------------------------------------------------- //
 
@@ -130,6 +120,7 @@ function searchRecipes() {
 
     uniqueUstensilesArray.forEach((item) => {
       displayItemsInFilter(item, importContainer, allTagsUstensiles);
+
     });
 
     filterUstensilesFromInput();
@@ -138,3 +129,63 @@ function searchRecipes() {
   return searchResults;
 }
 // -------------------------------------------------------------------------------------------------//
+
+// -----  FONCTION POUR FILTRER LES RECETTES AU CLIC SUR UN TAG -------------- //
+
+ function searchRecipesFromIngredientTag(searchResults) {
+  const ingredientsItemsContainer = document.querySelector(".import-ingredients");
+  const itemsIngredients = ingredientsItemsContainer.querySelectorAll(".items-in-filter");
+
+  itemsIngredients.forEach((itemIngredient) => {
+    itemIngredient.addEventListener("click", function() {
+      const clickedIngredient = itemIngredient.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
+
+      // On filtre les recettes qui contiennent l'ingrédient cliqué
+      const filteredRecipes = searchResults.filter((recipe) => {
+        return recipe.ingredients.some((ingredientList) => {          // On vérifie si au moins un élément de l'array ingredients inclue l'ingredient cliqué
+          return ingredientList.ingredient.toLowerCase().includes(clickedIngredient);
+        });
+      });
+
+      // On met à jour l'affichage des recettes avec les nouvelles recettes filtrées
+      cardContainer.innerHTML = "";
+      filteredRecipes.forEach((recipe) => {
+        const clickableCard = createRecipeCard(recipe);
+        cardContainer.appendChild(clickableCard);
+        
+      });
+
+      // On supprime l'élément cliqué de la liste des ingrédients
+      itemIngredient.remove();
+      updateIngredientFilter(filteredRecipes)
+    });
+  });
+}
+// -------------------------------------------------------------------------------------------------//
+
+// -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE INGREDIENT -------------- //
+function updateIngredientFilter(searchResults) {
+  const importContainer = document.querySelector(".import-ingredients");
+  const allTagsIngredients = document.querySelector(".tags-ingredients");
+
+  importContainer.innerHTML = "";
+
+  const uniqueIngredients = new Set();
+
+  searchResults.forEach((recipe) => {
+    recipe.ingredients.forEach((ingredientList) => {
+      uniqueIngredients.add(ingredientList.ingredient.toLowerCase());
+    });
+  });
+
+  const uniqueIngredientsArray = Array.from(uniqueIngredients);
+
+  uniqueIngredientsArray.forEach((item) => {
+    displayItemsInFilter(item, importContainer, allTagsIngredients);
+    searchRecipesFromIngredientTag(searchResults)
+  });
+}
+
+// ---------------------------------------------------------------------------- //
+
+searchRecipesFromIngredientTag(recipes)

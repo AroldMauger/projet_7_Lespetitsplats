@@ -1,3 +1,5 @@
+
+
 // -------------- FONCTION POUR CRÉER LES TAGS JAUNES  ------------//
 
 export function generateTag(item, allTagsContainer) {
@@ -31,3 +33,6 @@ export function generateTag(item, allTagsContainer) {
     allTagsContainer.appendChild(tagContainer);
   }
   // ----------------------------------------------------------------- //
+
+
+   

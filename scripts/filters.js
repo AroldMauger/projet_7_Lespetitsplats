@@ -1,7 +1,6 @@
 import { recipes } from "./recipes.js";
 import { generateTag } from "./tags.js";
 
-
 // OUVERTURE - FERMETURE DU FILTRE INGREDIENTS//
 
 const closeButtonInSearch = document.querySelectorAll(".close-in-search");
@@ -87,6 +86,7 @@ export function displayAllIngredients() {
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((ingredientList) => {
       listUniqueIngredients.add(ingredientList.ingredient.toLowerCase());
+
     });
   });
 
@@ -96,8 +96,10 @@ export function displayAllIngredients() {
 
   uniqueIngredientsArray.forEach((item) => {
     displayItemsInFilter(item, importContainer, allTagsContainer);
+
   });
   filterIngredientsFromInput();
+
 }
 // ----------------------------------------------------------------- //
 // AFFICHAGE DE TOUS LES APPAREILS A LA SUITE
@@ -164,6 +166,7 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
 
   itemElement.addEventListener("click", function()  {
     generateTag(item, allTagsContainer);
+
   });
 
 }
