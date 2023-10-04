@@ -78,15 +78,6 @@ export function createRecipeCard(recipe) {
 }
 // --------------------------------------------//
 
-// FONCTION QUI AFFICHE LES 10 PREMIERES RECETTES //
-export function displayFirstTenRecipes() {
-  const cardContainer = document.querySelector(".cards-container");
 
-  for (let i = 0; i < 10; i++) {
-    const recipe = recipes[i];
-    const clickableCard = createRecipeCard(recipe);
-    cardContainer.appendChild(clickableCard);
-  }
-}
 
-displayFirstTenRecipes();
+displayAllRecipes();

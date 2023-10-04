@@ -1,5 +1,5 @@
 import { recipes } from "./recipes.js";
-import { generateTag } from "./tags.js";
+import { generateTag } from "./search-native.js";
 
 // OUVERTURE - FERMETURE DU FILTRE INGREDIENTS//
 
@@ -165,8 +165,8 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
   // CREATION D'UN TAG AU CLIC SUR UN ITEM
 
   itemElement.addEventListener("click", function()  {
-    generateTag(item, allTagsContainer);
 
+    generateTag(item, allTagsContainer);
   });
 
 }
