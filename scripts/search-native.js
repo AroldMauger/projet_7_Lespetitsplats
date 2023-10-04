@@ -26,6 +26,7 @@ let uniqueUstensiles = new Set();
 
 
 let uniqueTagsIngredients = new Set(); 
+const hiddenIngredients = new Set();
 
 
 searchInput.addEventListener("input", function () {
@@ -43,6 +44,7 @@ searchInput.addEventListener("input", function () {
     importIngredientsContainer.innerHTML = "";
     importAppliancesContainer.innerHTML = "";
     importUstensilesContainer.innerHTML = "";
+    updateIngredientFilter(recipes)
     /*
     displayAllIngredients();
     displayAllAppliances();
@@ -126,6 +128,11 @@ export function searchRecipes() {
       const clickedIngredient = itemIngredient.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
       uniqueTagsIngredients.add(clickedIngredient)
 
+// Masquer l'item
+hiddenIngredients.add(clickedIngredient);
+      itemIngredient.style.display = "none";
+
+
       console.log(uniqueTagsIngredients)
       // On filtre les recettes qui contiennent l'ingrédient cliqué
       const filteredRecipes = searchResults.filter((recipe) => {
@@ -173,11 +180,18 @@ function updateIngredientFilter(searchResults) {
 
   searchResults.forEach((recipe) => {
     recipe.ingredients.forEach((ingredientList) => {
-      uniqueIngredients.add(ingredientList.ingredient.toLowerCase());
+      const ingredientName = ingredientList.ingredient.toLowerCase();
 
+      if (!hiddenIngredients.has(ingredientName)) {
+        uniqueIngredients.add(ingredientName);
+      }
     });
   });
-
+  hiddenIngredients.forEach((ingredientName) => {
+    if (!uniqueIngredients.has(ingredientName)) {
+      uniqueIngredients.add(ingredientName);
+    }
+  });
 
 console.log(uniqueIngredients)
 
@@ -229,6 +243,7 @@ function searchRecipesFromDeletedIngredientTag(item) {
   // Supprimez l'élément cliqué des ensembles uniques
   uniqueIngredients.delete(item.toLowerCase());
   uniqueTagsIngredients.delete(item.toLowerCase());
+  hiddenIngredients.delete(item.toLowerCase());
 
   // Réinitialisez l'affichage des recettes
   cardContainer.innerHTML = "";
@@ -258,6 +273,8 @@ function searchRecipesFromDeletedIngredientTag(item) {
     cardContainer.appendChild(clickableCard);
   });
   }
+  filterIngredientsFromInput();
+
 }
 
 

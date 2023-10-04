@@ -165,7 +165,6 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
   // CREATION D'UN TAG AU CLIC SUR UN ITEM
 
   itemElement.addEventListener("click", function()  {
-
     generateTag(item, allTagsContainer);
   });
 
@@ -268,8 +267,7 @@ closeButtonInSearch.forEach((closeBtn) => {
     }
     closeBtn.addEventListener("click", function () {
       ingredientFilterInput.value = "";
-      allIngredientsList.innerHTML = "";
-      displayAllIngredients();
+    
       closeButtonInSearch.forEach((btn) => {
         btn.style.display = "none";
       });
@@ -284,8 +282,7 @@ closeButtonInSearch.forEach((closeBtn) => {
     }
     closeBtn.addEventListener("click", function () {
       applianceFilterInput.value = "";
-      allAppliancesList.innerHTML = "";
-      displayAllAppliances();
+
       closeButtonInSearch.forEach((btn) => {
         btn.style.display = "none";
       });
@@ -300,8 +297,7 @@ closeButtonInSearch.forEach((closeBtn) => {
     }
     closeBtn.addEventListener("click", function () {
       ustensileFilterInput.value = "";
-      allUstensilesList.innerHTML = "";
-      displayAllUstensiles();
+ 
       closeButtonInSearch.forEach((btn) => {
         btn.style.display = "none";
       });
