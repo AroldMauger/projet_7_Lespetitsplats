@@ -18,9 +18,6 @@ const ingredientFilterInput = document.getElementById("search-ingredient"); // i
 const applianceFilterInput = document.getElementById("search-appliance");
 const ustensileFilterInput = document.getElementById("search-ustensile");
 
-const allIngredientsList = document.querySelector(".import-ingredients");
-const allAppliancesList = document.querySelector(".import-appliances");
-const allUstensilesList = document.querySelector(".import-ustensiles");
 
 // OUVERTURE - FERMETURE DU FILTRE INGREDIENT //
 buttonIngredients.addEventListener("click", function () {

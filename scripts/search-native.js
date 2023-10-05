@@ -251,6 +251,8 @@ function searchRecipesFromDeletedIngredientTag(item) {
     searchRecipes();
   } else {
   // Filtrer les recettes en utilisant à la fois les tags restants et le texte de recherche actuel
+  const tagsIngredientsArray = Array.from(uniqueTagsIngredients).map(tag => tag.toLowerCase());
+
   const filteredRecipes = recipes.filter((recipe) => {
     const recipeName = recipe.name.toLowerCase();
     const recipeDescription = recipe.description.toLowerCase();
@@ -260,11 +262,10 @@ function searchRecipesFromDeletedIngredientTag(item) {
     const matchesText = recipeName.includes(searchText) || recipeDescription.includes(searchText) || ingredients.some((ingredient) => ingredient.includes(searchText));
 
     // Vérifiez si la recette contient les tags restants
-    const containsTags = recipe.ingredients.some((ingredientList) => {
-      return uniqueTagsIngredients.has(ingredientList.ingredient.toLowerCase());
-    });
+    const containsAllTags = tagsIngredientsArray.every(tag => ingredients.includes(tag));
 
-    return matchesText && containsTags;
+
+    return matchesText && containsAllTags;
   });
 
   // Affichez les recettes filtrées
