@@ -1,5 +1,4 @@
-import { recipes } from "./recipes.js";
-import { generateTag } from "./search-native.js";
+import { generateTag } from "./tags.js";
 
 // OUVERTURE - FERMETURE DU FILTRE INGREDIENTS//
 
@@ -76,70 +75,6 @@ buttonUstensiles.addEventListener("click", function () {
   }
 });
 
-// ---- AFFICHAGE DE TOUS LES INGREDIENTS A LA SUITE ------ //
-export function displayAllIngredients() {
-  const listUniqueIngredients = new Set();
-
-  recipes.forEach((recipe) => {
-    recipe.ingredients.forEach((ingredientList) => {
-      listUniqueIngredients.add(ingredientList.ingredient.toLowerCase());
-
-    });
-  });
-
-  const importContainer = document.querySelector(".import-ingredients");
-  const uniqueIngredientsArray = Array.from(listUniqueIngredients);
-  const allTagsContainer = document.querySelector(".tags-ingredients");
-
-  uniqueIngredientsArray.forEach((item) => {
-    displayItemsInFilter(item, importContainer, allTagsContainer);
-
-  });
-  filterIngredientsFromInput();
-
-}
-// ----------------------------------------------------------------- //
-// AFFICHAGE DE TOUS LES APPAREILS A LA SUITE
-export function displayAllAppliances() {
-  const listUniqueAppliances = new Set();
-
-  recipes.forEach((recipe) => {
-    listUniqueAppliances.add(recipe.appliance.toLowerCase());
-  });
-
-  const importContainer = document.querySelector(".import-appliances");
-  const uniqueAppliancesArray = Array.from(listUniqueAppliances); // Le tableau avec la liste de tous les appareils
-  const allTagsContainer = document.querySelector(".tags-appliances");
-
-  uniqueAppliancesArray.forEach((item) => {
-    displayItemsInFilter(item, importContainer, allTagsContainer);
-  });
-
-  filterAppliancesFromInput();
-}
-// ----------------------------------------------------------------- //
-
-// AFFICHAGE DE TOUS LES USTENSILES A LA SUITE
-export function displayAllUstensiles() {
-  const listUniqueUstensiles = new Set();
-
-  recipes.forEach((recipe) => {
-    recipe.ustensils.forEach((ustensil) => {
-      listUniqueUstensiles.add(ustensil.toLowerCase());
-    });
-  });
-  const importContainer = document.querySelector(".import-ustensiles");
-  const uniqueUstensilesArray = Array.from(listUniqueUstensiles);
-  const allTagsContainer = document.querySelector(".tags-ustensiles");
-
-  uniqueUstensilesArray.forEach((item) => {
-    displayItemsInFilter(item, importContainer, allTagsContainer);
-  });
-
-  filterUstensilesFromInput();
-}
-// ----------------------------------------------------------------- //
-
 // --------------FONCTION POUR AFFICHER LES CONTENUS DE CHAQUE FILTRE  ------------//
 
 export function displayItemsInFilter(item, importContainer, allTagsContainer) {
@@ -167,7 +102,6 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
 
 }
 // ----------------------------------------------------------------- //
-
 
 
 // FONCTION POUR FILTRER LES NOMS DES INGREDIENTS EN FONCTION DE CE QU'ECRIT L'UTILISATEUR DANS LA BARRE DE RECHERCHE
@@ -307,6 +241,7 @@ export function removeAccents(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-displayAllIngredients();
-displayAllAppliances();
-displayAllUstensiles();
+
+filterIngredientsFromInput()
+filterAppliancesFromInput()
+filterUstensilesFromInput()

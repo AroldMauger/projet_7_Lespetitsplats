@@ -1,13 +1,7 @@
 import { recipes } from "./recipes.js";
 import { displayAllRecipes, createRecipeCard } from "./main.js";
 
-
-import {
-  displayItemsInFilter,
-  filterIngredientsFromInput,
-  filterAppliancesFromInput,
-  filterUstensilesFromInput,
-} from "./filters.js";
+import { displayItemsInFilter, filterIngredientsFromInput, filterAppliancesFromInput, filterUstensilesFromInput } from "./filters.js";
 
 const cardContainer = document.querySelector(".cards-container");
 const searchInput = document.getElementById("search-recipe");
@@ -16,20 +10,17 @@ const importAppliancesContainer = document.querySelector(".import-appliances");
 const importUstensilesContainer = document.querySelector(".import-ustensiles");
 
 let searchText = "";
-let uniqueIngredients = new Set(); 
-let uniqueTagsIngredients = new Set(); 
+export let uniqueIngredients = new Set();
+export let uniqueTagsIngredients = new Set();
 let hiddenIngredients = new Set();
 
-
-let uniqueAppliances = new Set();
-let uniqueTagsAppliances = new Set(); 
+export let uniqueAppliances = new Set();
+export let uniqueTagsAppliances = new Set();
 let hiddenAppliances = new Set();
 
-let uniqueUstensiles = new Set(); 
-let uniqueTagsUstensiles = new Set(); 
+export let uniqueUstensiles = new Set();
+export let uniqueTagsUstensiles = new Set();
 let hiddenUstensiles = new Set();
-
-
 
 searchInput.addEventListener("input", function () {
   searchText = searchInput.value.toLowerCase();
@@ -46,10 +37,9 @@ searchInput.addEventListener("input", function () {
     importIngredientsContainer.innerHTML = "";
     importAppliancesContainer.innerHTML = "";
     importUstensilesContainer.innerHTML = "";
-    updateIngredientFilter(recipes)
-    updateApplianceFilter(recipes)
-    updateUstensileFilter(recipes)
-
+    updateIngredientFilter(recipes);
+    updateApplianceFilter(recipes);
+    updateUstensileFilter(recipes);
   }
 });
 // ------- -FONCTION POUR FILTRER LES RECETTES EN FONCTION DU TEXTE DANS LA BARRE DE RECHERCHE ---------
@@ -60,15 +50,14 @@ export function searchRecipes() {
     const recipe = recipes[i];
     const recipeName = recipe.name; //on récupère le nom de la recette dans une variable
     const recipeDescription = recipe.description; //on récupère la description de la recette dans une variable
-
     const ingredientsNameArray = []; //on récupère les ingrédients de la recette dans une variable
+
     for (let j = 0; j < recipe.ingredients.length; j++) {
       ingredientsNameArray.push(recipe.ingredients[j].ingredient);
     }
-
     let searchMatch = false;
 
-    if (recipeName.toLowerCase().includes(searchText) || recipeDescription.toLowerCase().includes(searchText)) {
+    if (recipeName.toLowerCase().includes(searchText) ||recipeDescription.toLowerCase().includes(searchText)) {
       searchMatch = true;
     }
 
@@ -87,7 +76,7 @@ export function searchRecipes() {
 
   cardContainer.innerHTML = ""; // On efface les recettes affichées par défaut
 
-  if (searchResults.length > 0) { 
+  if (searchResults.length > 0) {
     // Si des recettes ont été trouvées
     searchResults.forEach((recipe) => {
       const clickableCard = createRecipeCard(recipe); // On crée une carte recette pour chaque recette
@@ -95,21 +84,12 @@ export function searchRecipes() {
     });
 
     // ---- AFFICHAGE DES ITEMS INGREDIENTS DANS LE FILTRE -------- //
-    updateIngredientFilter(searchResults)
+    updateIngredientFilter(searchResults);
     filterIngredientsFromInput();
-    // ---------------------------------------------------------- //
-
-    // ---- AFFICHAGE DES ITEMS APPAREILS DANS LE FILTRE -------- //
-
     updateApplianceFilter(searchResults);
     filterAppliancesFromInput();
-    // ---------------------------------------------------------- //
-
-    // ---- AFFICHAGE DES ITEMS USTENSILES DANS LE FILTRE -------- //
     updateUstensileFilter(searchResults);
-
     filterUstensilesFromInput();
-    // ---------------------------------------------------------- // 
   }
   return searchResults;
 }
@@ -117,27 +97,30 @@ export function searchRecipes() {
 
 // -----  FONCTION POUR FILTRER LES RECETTES PAR INGREDIENT AU CLIC SUR UN TAG -------------- //
 
- function searchRecipesFromIngredientTag(searchResults) {
-  const ingredientsItemsContainer = document.querySelector(".import-ingredients");
-  const itemsIngredients = ingredientsItemsContainer.querySelectorAll(".items-in-filter");
+function searchRecipesFromIngredientTag(searchResults) {
+  const ingredientsItemsContainer = document.querySelector(
+    ".import-ingredients"
+  );
+  const itemsIngredients =
+    ingredientsItemsContainer.querySelectorAll(".items-in-filter");
 
   itemsIngredients.forEach((itemIngredient) => {
-    itemIngredient.addEventListener("click", function() {
-
-
+    itemIngredient.addEventListener("click", function () {
       const clickedIngredient = itemIngredient.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
-      uniqueTagsIngredients.add(clickedIngredient)
+      uniqueTagsIngredients.add(clickedIngredient);
 
-// Masquer l'item
-hiddenIngredients.add(clickedIngredient);
+      // Masquer l'item
+      hiddenIngredients.add(clickedIngredient);
       itemIngredient.style.display = "none";
 
-
-      console.log(uniqueTagsIngredients)
+      console.log(uniqueTagsIngredients);
       // On filtre les recettes qui contiennent l'ingrédient cliqué
       const filteredRecipes = searchResults.filter((recipe) => {
-        return recipe.ingredients.some((ingredientList) => {          // On vérifie si au moins un élément de l'array ingredients inclue l'ingredient cliqué
-          return ingredientList.ingredient.toLowerCase().includes(clickedIngredient);
+        return recipe.ingredients.some((ingredientList) => {
+          // On vérifie si au moins un élément de l'array ingredients inclue l'ingredient cliqué
+          return ingredientList.ingredient
+            .toLowerCase()
+            .includes(clickedIngredient);
         });
       });
 
@@ -148,9 +131,9 @@ hiddenIngredients.add(clickedIngredient);
         cardContainer.appendChild(clickableCard);
       });
       // On supprime l'élément cliqué de la liste des ingrédients
-      updateIngredientFilter(filteredRecipes)
-      updateApplianceFilter(filteredRecipes)
-      updateUstensileFilter(filteredRecipes)
+      updateIngredientFilter(filteredRecipes);
+      updateApplianceFilter(filteredRecipes);
+      updateUstensileFilter(filteredRecipes);
       filterIngredientsFromInput();
       filterAppliancesFromInput();
       filterUstensilesFromInput();
@@ -159,13 +142,7 @@ hiddenIngredients.add(clickedIngredient);
 }
 // -------------------------------------------------------------------------------------------------//
 
-
-
-
 // ---------------------------------------------------------------------------- //
-
-
-
 
 // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE INGREDIENT -------------- //
 function updateIngredientFilter(searchResults) {
@@ -191,63 +168,19 @@ function updateIngredientFilter(searchResults) {
     }
   });
 
-console.log(uniqueIngredients)
+  console.log(uniqueIngredients);
 
   const uniqueIngredientsArray = Array.from(uniqueIngredients);
 
   uniqueIngredientsArray.forEach((item) => {
     displayItemsInFilter(item, importContainer, allTagsIngredients);
     searchRecipesFromIngredientTag(searchResults);
-
   });
 }
 
 // ---------------------------------------------------------------------------- //
 
-
-
-
-// Modifier la fonction generateTag pour prendre un gestionnaire d'événements de clic
-export function generateTag(item, allTagsContainer) {
-
-  const tagContainer = document.createElement("div");
-  tagContainer.classList.add("tag");
-
-  const tagName = document.createElement("span");
-  tagName.textContent = item;
-  tagName.classList.add("tag-content");
-  
-  const closeTag = document.createElement("span");
-  closeTag.classList.add("bi-x-lg");
-  closeTag.classList.add("close-tag-button");
-
-  closeTag.addEventListener("click", function () {
-    tagContainer.remove()
-    if(uniqueTagsIngredients.size > 0) {
-      uniqueTagsIngredients.delete(item.toLowerCase());
-      uniqueIngredients.delete(item.toLowerCase());
-      
-      searchRecipesFromDeletedIngredientTag(item); // Passer directement le texte du tag
-      console.log(uniqueTagsIngredients)
-  
-    } if(uniqueTagsAppliances.size > 0) {
-      uniqueTagsAppliances.delete(item.toLowerCase());
-      uniqueAppliances.delete(item.toLowerCase());
-      searchRecipesFromDeletedApplianceTag(item)
-    } if (uniqueTagsUstensiles.size > 0) {
-      uniqueTagsUstensiles.delete(item.toLowerCase());
-      uniqueUstensiles.delete(item.toLowerCase());
-      searchRecipesFromDeletedUstensileTag(item)
-    }
-   
-  });
-
-  tagContainer.appendChild(tagName);
-  tagContainer.appendChild(closeTag);
-  allTagsContainer.appendChild(tagContainer);
-}
-
-function searchRecipesFromDeletedIngredientTag(item) {
+export function searchRecipesFromDeletedIngredientTag(item) {
   // Supprimez l'élément cliqué des ensembles uniques
   uniqueIngredients.delete(item.toLowerCase());
   uniqueTagsIngredients.delete(item.toLowerCase());
@@ -255,64 +188,56 @@ function searchRecipesFromDeletedIngredientTag(item) {
 
   // Réinitialisez l'affichage des recettes
   cardContainer.innerHTML = "";
-  if (uniqueTagsUstensiles.size === 0 && uniqueTagsIngredients.size === 0 && uniqueTagsAppliances.size === 0) {
+  if (
+    uniqueTagsUstensiles.size === 0 &&
+    uniqueTagsIngredients.size === 0 &&
+    uniqueTagsAppliances.size === 0
+  ) {
     searchRecipes();
-  } 
-else {
-    searchByTags(item)
+  } else {
+    searchByTags(item);
   }
   filterIngredientsFromInput();
-
 }
 
-
-
 // ---------------------------------------------------------------------------- //
-
-
-
-
-
-
-
 
 // -----  FONCTION POUR FILTRER LES RECETTES PAR APPAREILS AU CLIC SUR UN TAG -------------- //
 
 function searchRecipesFromApplianceTag(searchResults) {
   const applianceItemsContainer = document.querySelector(".import-appliances");
-  const itemsAppliances = applianceItemsContainer.querySelectorAll(".items-in-filter");
+  const itemsAppliances =
+    applianceItemsContainer.querySelectorAll(".items-in-filter");
 
   itemsAppliances.forEach((itemAppliance) => {
-    itemAppliance.addEventListener("click", function() {
+    itemAppliance.addEventListener("click", function () {
       const clickedAppliance = itemAppliance.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
 
-      uniqueTagsAppliances.add(clickedAppliance)
-  
+      uniqueTagsAppliances.add(clickedAppliance);
+
       // Masquer l'item
-        hiddenAppliances.add(clickedAppliance);
-        itemAppliance.style.display = "none";
+      hiddenAppliances.add(clickedAppliance);
+      itemAppliance.style.display = "none";
 
-        console.log(itemAppliance)
-        console.log(hiddenAppliances)
-
+      console.log(itemAppliance);
+      console.log(hiddenAppliances);
 
       // On filtre les recettes qui contiennent l'ingrédient cliqué
       const filteredRecipes = searchResults.filter((recipe) => {
         return recipe.appliance.toLowerCase().includes(clickedAppliance);
-        });
+      });
 
       // On met à jour l'affichage des recettes avec les nouvelles recettes filtrées
       cardContainer.innerHTML = "";
       filteredRecipes.forEach((recipe) => {
         const clickableCard = createRecipeCard(recipe);
         cardContainer.appendChild(clickableCard);
-        
       });
 
       // On supprime l'élément cliqué de la liste des ingrédients
-      updateIngredientFilter(filteredRecipes)
-      updateApplianceFilter(filteredRecipes)
-      updateUstensileFilter(filteredRecipes)
+      updateIngredientFilter(filteredRecipes);
+      updateApplianceFilter(filteredRecipes);
+      updateUstensileFilter(filteredRecipes);
       filterIngredientsFromInput();
       filterAppliancesFromInput();
       filterUstensilesFromInput();
@@ -320,7 +245,6 @@ function searchRecipesFromApplianceTag(searchResults) {
   });
 }
 // -------------------------------------------------------------------------------------------------//
-
 
 // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE APPAREILS -------------- //
 function updateApplianceFilter(searchResults) {
@@ -332,7 +256,7 @@ function updateApplianceFilter(searchResults) {
   uniqueAppliances.clear(); // Réinitialisez le Set uniqueAppliances
 
   searchResults.forEach((recipe) => {
-    uniqueAppliances.add(recipe.appliance.toLowerCase());       // CHERCHER POURQUOI L'ITEM NE S'EFFACE PAS
+    uniqueAppliances.add(recipe.appliance.toLowerCase()); // CHERCHER POURQUOI L'ITEM NE S'EFFACE PAS
     const applianceName = recipe.appliance.toLowerCase();
 
     if (!hiddenAppliances.has(applianceName)) {
@@ -345,9 +269,8 @@ function updateApplianceFilter(searchResults) {
       uniqueAppliances.add(applianceName);
     }
   });
- 
-  console.log(uniqueAppliances)
 
+  console.log(uniqueAppliances);
 
   const uniqueAppliancesArray = Array.from(uniqueAppliances);
 
@@ -359,9 +282,7 @@ function updateApplianceFilter(searchResults) {
 
 // ---------------------------------------------------------------------------- //
 
-
-
-function searchRecipesFromDeletedApplianceTag(item) {
+export function searchRecipesFromDeletedApplianceTag(item) {
   // Supprimez l'élément cliqué des ensembles uniques
   uniqueAppliances.delete(item.toLowerCase());
   uniqueTagsAppliances.delete(item.toLowerCase());
@@ -369,82 +290,72 @@ function searchRecipesFromDeletedApplianceTag(item) {
 
   // Réinitialisez l'affichage des recettes
   cardContainer.innerHTML = "";
-  if (uniqueTagsUstensiles.size === 0 && uniqueTagsIngredients.size === 0 && uniqueTagsAppliances.size === 0) {
+  if (
+    uniqueTagsUstensiles.size === 0 &&
+    uniqueTagsIngredients.size === 0 &&
+    uniqueTagsAppliances.size === 0
+  ) {
     searchRecipes();
-  } 
- 
-  else {
+  } else {
     searchByTags(item);
-
   }
   filterAppliancesFromInput();
-
 }
 
+searchRecipesFromIngredientTag(recipes);
+updateIngredientFilter(recipes);
 
-searchRecipesFromIngredientTag(recipes)
-updateIngredientFilter(recipes)
+searchRecipesFromApplianceTag(recipes);
+updateApplianceFilter(recipes);
 
-searchRecipesFromApplianceTag(recipes)
-updateApplianceFilter(recipes)
+searchRecipesFromUstensileTag(recipes);
+updateUstensileFilter(recipes);
 
-
-searchRecipesFromUstensileTag(recipes)
-updateUstensileFilter(recipes)
-
-
-
-
-
-
-  
 // -----  FONCTION POUR FILTRER LES RECETTES PAR USTENSILE AU CLIC SUR UN TAG -------------- //
 
 function searchRecipesFromUstensileTag(searchResults) {
-    const ustensilesItemsContainer = document.querySelector(".import-ustensiles");
-    const itemsUstensiles = ustensilesItemsContainer.querySelectorAll(".items-in-filter");
-  
-    itemsUstensiles.forEach((itemUstensile) => {
-      itemUstensile.addEventListener("click", function() {
-        const clickedUstensile = itemUstensile.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
-        uniqueTagsUstensiles.add(clickedUstensile)
+  const ustensilesItemsContainer = document.querySelector(".import-ustensiles");
+  const itemsUstensiles =
+    ustensilesItemsContainer.querySelectorAll(".items-in-filter");
 
-        // Masquer l'item
-        hiddenUstensiles.add(clickedUstensile);
-        itemUstensile.style.display = "none";
+  itemsUstensiles.forEach((itemUstensile) => {
+    itemUstensile.addEventListener("click", function () {
+      const clickedUstensile = itemUstensile.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
+      uniqueTagsUstensiles.add(clickedUstensile);
 
-        console.log(uniqueTagsUstensiles)
+      // Masquer l'item
+      hiddenUstensiles.add(clickedUstensile);
+      itemUstensile.style.display = "none";
 
-        // On filtre les recettes qui contiennent l'ingrédient cliqué
-        const filteredRecipes = searchResults.filter((recipe) => {
-          return recipe.ustensils.some((ustensil) => {          // On vérifie si au moins un élément de l'array ingredients inclue l'ingredient cliqué
-            return ustensil.toLowerCase().includes(clickedUstensile);
-          });
+      console.log(uniqueTagsUstensiles);
+
+      // On filtre les recettes qui contiennent l'ingrédient cliqué
+      const filteredRecipes = searchResults.filter((recipe) => {
+        return recipe.ustensils.some((ustensil) => {
+          // On vérifie si au moins un élément de l'array ingredients inclue l'ingredient cliqué
+          return ustensil.toLowerCase().includes(clickedUstensile);
         });
-  
-        // On met à jour l'affichage des recettes avec les nouvelles recettes filtrées
-        cardContainer.innerHTML = "";
-        filteredRecipes.forEach((recipe) => {
-          const clickableCard = createRecipeCard(recipe);
-          cardContainer.appendChild(clickableCard);
-          
-        });
-  
-        // On supprime l'élément cliqué de la liste des ingrédients
-        updateIngredientFilter(filteredRecipes)
-        updateApplianceFilter(filteredRecipes)
-        updateUstensileFilter(filteredRecipes)
-        filterIngredientsFromInput();
-        filterAppliancesFromInput();
-        filterUstensilesFromInput();
       });
+
+      // On met à jour l'affichage des recettes avec les nouvelles recettes filtrées
+      cardContainer.innerHTML = "";
+      filteredRecipes.forEach((recipe) => {
+        const clickableCard = createRecipeCard(recipe);
+        cardContainer.appendChild(clickableCard);
+      });
+
+      // On supprime l'élément cliqué de la liste des ingrédients
+      updateIngredientFilter(filteredRecipes);
+      updateApplianceFilter(filteredRecipes);
+      updateUstensileFilter(filteredRecipes);
+      filterIngredientsFromInput();
+      filterAppliancesFromInput();
+      filterUstensilesFromInput();
     });
-  }
-  // -------------------------------------------------------------------------------------------------//
-  
+  });
+}
+// -------------------------------------------------------------------------------------------------//
 
-
-  
 // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE USTENSILE -------------- //
 function updateUstensileFilter(searchResults) {
   const importContainer = document.querySelector(".import-ustensiles");
@@ -461,7 +372,6 @@ function updateUstensileFilter(searchResults) {
       if (!hiddenUstensiles.has(ustensileName)) {
         uniqueUstensiles.add(ustensileName);
       }
-
     });
   });
 
@@ -479,8 +389,7 @@ function updateUstensileFilter(searchResults) {
   });
 }
 
-
-function searchRecipesFromDeletedUstensileTag(item) {
+export function searchRecipesFromDeletedUstensileTag(item) {
   // Supprimez l'élément cliqué des ensembles uniques
   uniqueUstensiles.delete(item.toLowerCase());
   uniqueTagsUstensiles.delete(item.toLowerCase());
@@ -488,44 +397,67 @@ function searchRecipesFromDeletedUstensileTag(item) {
 
   // Réinitialisez l'affichage des recettes
   cardContainer.innerHTML = "";
-  if (uniqueTagsUstensiles.size === 0 && uniqueTagsIngredients.size === 0 && uniqueTagsAppliances.size === 0) {
+  if (
+    uniqueTagsUstensiles.size === 0 &&
+    uniqueTagsIngredients.size === 0 &&
+    uniqueTagsAppliances.size === 0
+  ) {
     searchRecipes();
-  } 
-  
-  else {    
+  } else {
     searchByTags(item);
   }
   filterIngredientsFromInput();
-
 }
 
-
 function searchByTags() {
-
   cardContainer.innerHTML = "";
-  
-  const tagsAppliancesArray = Array.from(uniqueTagsAppliances).map(tag => tag.toLowerCase());
-    const tagsIngredientsArray = Array.from(uniqueTagsIngredients).map(tag => tag.toLowerCase());
-    const tagsUstensilesArray = Array.from(uniqueTagsUstensiles).map(tag => tag.toLowerCase());
+
+  const tagsAppliancesArray = Array.from(uniqueTagsAppliances).map((tag) =>
+    tag.toLowerCase()
+  );
+  const tagsIngredientsArray = Array.from(uniqueTagsIngredients).map((tag) =>
+    tag.toLowerCase()
+  );
+  const tagsUstensilesArray = Array.from(uniqueTagsUstensiles).map((tag) =>
+    tag.toLowerCase()
+  );
 
   // Filtrer les recettes en utilisant à la fois les tags restants et le texte de recherche actuel
   const filteredRecipes = recipes.filter((recipe) => {
     const recipeName = recipe.name.toLowerCase();
     const recipeDescription = recipe.description.toLowerCase();
     const appliances = recipe.appliance.toLowerCase();
-    const ingredients = recipe.ingredients.map((ingredient) => ingredient.ingredient.toLowerCase());
-    const ustensiles = recipe.ustensils.map((ustensil) => ustensil.toLowerCase());
+    const ingredients = recipe.ingredients.map((ingredient) =>
+      ingredient.ingredient.toLowerCase()
+    );
+    const ustensiles = recipe.ustensils.map((ustensil) =>
+      ustensil.toLowerCase()
+    );
 
     // Vérifiez si le nom de la recette, la description ou les ingrédients correspondent
-    const matchesText = recipeName.includes(searchText) || recipeDescription.includes(searchText) || ingredients.some((ingredient) => ingredient.includes(searchText));
+    const matchesText =
+      recipeName.includes(searchText) ||
+      recipeDescription.includes(searchText) ||
+      ingredients.some((ingredient) => ingredient.includes(searchText));
 
     // Vérifiez si la recette contient les tags restants
-    
-    const containsTabAppliance = tagsAppliancesArray.every(tag => appliances.includes(tag));
-    const containsTagIngredient = tagsIngredientsArray.every(tag => ingredients.includes(tag));
-    const containsTagUstensile = tagsUstensilesArray.every(tag => ustensiles.includes(tag));
 
-    return matchesText && containsTabAppliance && containsTagIngredient && containsTagUstensile;
+    const containsTabAppliance = tagsAppliancesArray.every((tag) =>
+      appliances.includes(tag)
+    );
+    const containsTagIngredient = tagsIngredientsArray.every((tag) =>
+      ingredients.includes(tag)
+    );
+    const containsTagUstensile = tagsUstensilesArray.every((tag) =>
+      ustensiles.includes(tag)
+    );
+
+    return (
+      matchesText &&
+      containsTabAppliance &&
+      containsTagIngredient &&
+      containsTagUstensile
+    );
   });
 
   // Affichez les recettes filtrées
@@ -533,6 +465,4 @@ function searchByTags() {
     const clickableCard = createRecipeCard(recipe);
     cardContainer.appendChild(clickableCard);
   });
-  
-
 }
