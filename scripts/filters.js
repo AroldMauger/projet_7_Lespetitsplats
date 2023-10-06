@@ -242,6 +242,10 @@ export function removeAccents(str) {
 }
 
 
-filterIngredientsFromInput()
-filterAppliancesFromInput()
-filterUstensilesFromInput()
+export function filterItemsFromSearchInFilters () {
+  filterIngredientsFromInput()
+  filterAppliancesFromInput()
+  filterUstensilesFromInput()
+}
+
+filterItemsFromSearchInFilters()
