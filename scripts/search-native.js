@@ -75,10 +75,11 @@ export function searchRecipes() {
   if (searchResults.length > 0) {
 
     // Si des recettes ont été trouvées
-    searchResults.forEach((recipe) => {
-      const clickableCard = createRecipeCard(recipe); // On crée une carte recette pour chaque recette
+    for (let i = 0; i < searchResults.length; i++) {
+      const recipe = searchResults[i];
+      const clickableCard = createRecipeCard(recipe);
       cardContainer.appendChild(clickableCard);
-    });
+    }
 
     totalRecipes.textContent = searchResults.length + " recettes"
 

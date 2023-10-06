@@ -1,7 +1,5 @@
-import { searchRecipesFromDeletedIngredientTag, searchRecipesFromDeletedApplianceTag, searchRecipesFromDeletedUstensileTag } from "./search-native.js";
-import { uniqueTagsIngredients, uniqueIngredients, uniqueTagsAppliances, uniqueAppliances, uniqueTagsUstensiles, uniqueUstensiles} from "./search-native.js";
-
-
+import { searchRecipesFromDeletedIngredientTag, searchRecipesFromDeletedApplianceTag, searchRecipesFromDeletedUstensileTag, 
+  uniqueTagsIngredients, uniqueIngredients, uniqueTagsAppliances, uniqueAppliances, uniqueTagsUstensiles, uniqueUstensiles } from "./search-native.js";
 
 export function generateTag(item, allTagsContainer) {
 
