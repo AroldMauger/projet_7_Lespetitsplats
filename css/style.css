@@ -63,7 +63,7 @@ header {
 .nav-bar button {
     display: flex;
     justify-content: space-between;
-    font-family: 'Manrope';
+    font-family: 'Manrope', sans-serif;
 }
 .total-recipes {
     font-family: 'Anton', sans-serif;
@@ -103,7 +103,7 @@ header {
     outline: none;
     height: 35px;
     color:#7A7A7A;
-    font-family: 'Manrope' sans-serif;
+    font-family: 'Manrope', sans-serif;
 }
 
 .import {
@@ -124,7 +124,7 @@ header {
     width: 100%;
     padding-left: 17px;
     padding-block: 13px;
-    font-family: 'Manrope' sans-serif;
+    font-family: 'Manrope', sans-serif;
 
 }
 
@@ -200,7 +200,7 @@ header {
     border-radius: 15px;
     right: 1rem;
     top: 1rem;
-    font-family: 'Manrope' sans-serif;;
+    font-family: 'Manrope', sans-serif;;
     text-align: center;
     font-size: 12px;
     padding-block: 5px;
@@ -230,7 +230,7 @@ header {
     overflow: hidden;
     margin-top: 15px;
     margin-bottom: 30px;
-    font-family: 'Manrope';
+    font-family: 'Manrope', sans-serif;
 
 }
 
@@ -250,21 +250,21 @@ header {
 
 .section-in-recipe {
     color: #7A7A7A;
-    font-family: 'Manrope';
+    font-family: 'Manrope', sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1.08px;
 }
 
 .ingredient-name {
-    font-family: 'Manrope';
+    font-family: 'Manrope', sans-serif;
     font-weight: 500;
     font-size: 14px;
 }
 
 .quantity {
     color:  #7A7A7A;
-    font-family: 'Manrope';
+    font-family: 'Manrope', sans-serif;
     font-size: 14px;
     font-weight: 400;
 }
