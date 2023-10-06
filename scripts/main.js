@@ -8,6 +8,9 @@ export function displayAllRecipes() {
     const clickableCard = createRecipeCard(recipe);
     cardContainer.appendChild(clickableCard);
   });
+
+  const totalRecipes = document.querySelector(".total-recipes");
+  totalRecipes.textContent = recipes.length + " recettes"
 }
 // --------------------------------------------//
 

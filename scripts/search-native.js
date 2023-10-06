@@ -8,6 +8,7 @@ const searchInput = document.getElementById("search-recipe");
 const importIngredientsContainer = document.querySelector(".import-ingredients");
 const importAppliancesContainer = document.querySelector(".import-appliances");
 const importUstensilesContainer = document.querySelector(".import-ustensiles");
+const totalRecipes = document.querySelector(".total-recipes");
 
 let searchText = "";
 export let uniqueIngredients = new Set();
@@ -33,7 +34,7 @@ searchInput.addEventListener("input", function () {
   }
   if (searchText === "") {
     cardContainer.innerHTML = "";
-    displayAllRecipes();
+    searchByTags();
     importIngredientsContainer.innerHTML = "";
     importAppliancesContainer.innerHTML = "";
     importUstensilesContainer.innerHTML = "";
@@ -88,6 +89,8 @@ export function searchRecipes() {
       cardContainer.appendChild(clickableCard);
     });
 
+    totalRecipes.textContent = searchResults.length + " recettes"
+
     // ---- AFFICHAGE DES ITEMS INGREDIENTS DANS LE FILTRE -------- //
     updateIngredientFilter(searchResults);
     filterIngredientsFromInput();
@@ -135,6 +138,9 @@ function searchRecipesFromIngredientTag(searchResults) {
         const clickableCard = createRecipeCard(recipe);
         cardContainer.appendChild(clickableCard);
       });
+
+      totalRecipes.textContent = filteredRecipes.length + " recettes"
+
       // On supprime l'élément cliqué de la liste des ingrédients
       updateIngredientFilter(filteredRecipes);
       updateApplianceFilter(filteredRecipes);
@@ -238,6 +244,7 @@ function searchRecipesFromApplianceTag(searchResults) {
         const clickableCard = createRecipeCard(recipe);
         cardContainer.appendChild(clickableCard);
       });
+      totalRecipes.textContent = filteredRecipes.length + " recettes"
 
       // On supprime l'élément cliqué de la liste des ingrédients
       updateIngredientFilter(filteredRecipes);
@@ -348,6 +355,7 @@ function searchRecipesFromUstensileTag(searchResults) {
         const clickableCard = createRecipeCard(recipe);
         cardContainer.appendChild(clickableCard);
       });
+      totalRecipes.textContent = filteredRecipes.length + " recettes"
 
       // On supprime l'élément cliqué de la liste des ingrédients
       updateIngredientFilter(filteredRecipes);
@@ -470,4 +478,7 @@ function searchByTags() {
     const clickableCard = createRecipeCard(recipe);
     cardContainer.appendChild(clickableCard);
   });
+
+  totalRecipes.textContent = filteredRecipes.length + " recettes"
+
 }
