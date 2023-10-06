@@ -72,11 +72,16 @@ export function searchRecipes() {
       // si une des trois conditions est réunie,
       searchResults.push(recipe); // on push la recette dans notre array searchResults[]
     }
+   
   }
 
   cardContainer.innerHTML = ""; // On efface les recettes affichées par défaut
+  if (searchResults.length === 0) {
+    cardContainer.innerHTML = `<span style="font-size: 25px; margin-left:100px; padding-bottom:150px;color: darkred;">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
+}
 
   if (searchResults.length > 0) {
+
     // Si des recettes ont été trouvées
     searchResults.forEach((recipe) => {
       const clickableCard = createRecipeCard(recipe); // On crée une carte recette pour chaque recette
