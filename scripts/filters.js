@@ -93,6 +93,7 @@ export function filterIngredientsFromInput() {
   ingredientFilterInput.addEventListener("input", (event) => {
     const filterText = removeAccents(event.target.value.toLowerCase()); // ici, le texte qu'on écrit dans l'input sans accent
     // ToLowerCase() nous permet de comparer l'input et les ingrédients avec la même casse
+    
     ingredientItems.forEach((ingredientItem) => {
       ingredientItem.addEventListener("click", function () {
         // permet de supprimer le texte dans la barre de recherche
@@ -102,16 +103,20 @@ export function filterIngredientsFromInput() {
           closeBtn.style.display = "none";
         });
       });
-      const ingredientName = removeAccents(
-        ingredientItem.textContent.toLowerCase()
-      ); // ici, l'ingrédient dans la liste sans accent
-      if (ingredientName.includes(filterText)) {
-        ingredientItem.style.display = "block";
-      } else {
-        ingredientItem.style.display = "none";
-      }
+
+      setTimeout(function () {
+        const ingredientName = removeAccents(
+          ingredientItem.textContent.toLowerCase()
+        ); // ici, l'ingrédient dans la liste sans accent
+        if (ingredientName.includes(filterText)) {
+          ingredientItem.style.display = "block";
+        } else {
+          ingredientItem.style.display = "none";
+        }
+      }, 300);
     });
   });
+
 }
 
 // FONCTION POUR FILTRER LES NOMS DES APPAREILS EN FONCTION DE CE QU'ECRIT L'UTILISATEUR DANS LA BARRE DE RECHERCHE
@@ -131,12 +136,14 @@ export function filterAppliancesFromInput() {
           closeBtn.style.display = "none";
         });
       });
-      const applianceName = removeAccents(item.textContent.toLowerCase()); // ici, l'appareil dans la liste sans accent
-      if (applianceName.includes(filterText)) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
+      setTimeout(function () {
+        const applianceName = removeAccents(item.textContent.toLowerCase()); // ici, l'appareil dans la liste sans accent
+        if (applianceName.includes(filterText)) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      }, 300);
     });
   });
 }
@@ -148,7 +155,7 @@ export function filterUstensilesFromInput() {
 
   ustensileFilterInput.addEventListener("input", (event) => {
     const filterText = removeAccents(event.target.value.toLowerCase()); // ici, le texte qu'on écrit dans l'input sans accent
-    // ToLowerCase() nous permet de comparer l'input et les ustensiles avec la même casse
+                                                                        // ToLowerCase() nous permet de comparer l'input et les ustensiles avec la même casse
     items.forEach((item) => {
       item.addEventListener("click", function () {
         // permet de supprimer le texte dans la barre de recherche
@@ -158,70 +165,49 @@ export function filterUstensilesFromInput() {
           closeBtn.style.display = "none";
         });
       });
-      const ustensileName = removeAccents(item.textContent.toLowerCase()); // ici, l'ustensile dans la liste sans accent
-      if (ustensileName.includes(filterText)) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
+      setTimeout(function () {
+        const ustensileName = removeAccents(item.textContent.toLowerCase()); // ici, l'ustensile dans la liste sans accent
+        if (ustensileName.includes(filterText)) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      }, 300);
     });
   });
 }
 
-// FONCTION POUR FAIRE APPARAITRE LA CROIX DANS LA BARRE DE RECHERCHE
+// FONCTION POUR FAIRE APPARAITRE LA CROIX DANS LA BARRE DE RECHERCHE DE CHAQUE FILTRE //
 
-closeButtonInSearch.forEach((closeBtn) => {
-  ingredientFilterInput.addEventListener("input", function (event) {
+function displayCloseButtonInSearchByFilter(filterInput, closeButton) {
+  filterInput.addEventListener("input", function (event) {
     if (event.target.value === "") {
-      closeBtn.style.display = "none";
+      closeButton.style.display = "none";
     } else {
-      closeBtn.style.display = "block";
+      closeButton.style.display = "block";
     }
-    closeBtn.addEventListener("click", function () {
-      ingredientFilterInput.value = "";
-    
-      closeButtonInSearch.forEach((btn) => {
-        btn.style.display = "none";
-      });
-    });
   });
 
-  applianceFilterInput.addEventListener("input", function (event) {
-    if (event.target.value === "") {
-      closeBtn.style.display = "none";
-    } else {
-      closeBtn.style.display = "block";
-    }
-    closeBtn.addEventListener("click", function () {
-      applianceFilterInput.value = "";
+  closeButton.addEventListener("click", function () {
+    filterInput.value = "";
 
-      closeButtonInSearch.forEach((btn) => {
-        btn.style.display = "none";
-      });
+    closeButtonInSearch.forEach((btn) => {
+      btn.style.display = "none";
     });
   });
+}
 
-  ustensileFilterInput.addEventListener("input", function (event) {
-    if (event.target.value === "") {
-      closeBtn.style.display = "none";
-    } else {
-      closeBtn.style.display = "block";
-    }
-    closeBtn.addEventListener("click", function () {
-      ustensileFilterInput.value = "";
- 
-      closeButtonInSearch.forEach((btn) => {
-        btn.style.display = "none";
-      });
-    });
-  });
-});
+displayCloseButtonInSearchByFilter(ingredientFilterInput, closeButtonInSearch[0]);
+displayCloseButtonInSearchByFilter(applianceFilterInput, closeButtonInSearch[1]);
+displayCloseButtonInSearchByFilter(ustensileFilterInput, closeButtonInSearch[2]);
+
 
 // FONCTION POUR NORMALISER LES CARACTERES RECHERCHÉS DANS L'INPUT SANS ACCENTS
 export function removeAccents(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+// Fonction générique pour permettre le filtre à partir du texte dans la barre de recherche des filtres
 
 export function filterItemsFromSearchInFilters () {
   filterIngredientsFromInput()
