@@ -16,6 +16,10 @@ export function createRecipeCard(recipe) {
   const clickableCard = document.createElement("a");
   clickableCard.classList.add("clickable-card");
 
+  const timeRecipe = document.createElement("span");
+  timeRecipe.classList.add("time");
+  timeRecipe.textContent = recipe.time + "min";
+
   const recipeImage = document.createElement("img");
   recipeImage.setAttribute("src", `assets/images/${recipe.image}`);
   recipeImage.classList.add("recipe-image");
@@ -66,6 +70,7 @@ export function createRecipeCard(recipe) {
     ingredientAndQuantity.appendChild(quantity);
   });
 
+  clickableCard.appendChild(timeRecipe);
   clickableCard.appendChild(recipeImage);
   clickableCard.appendChild(textInRecipeContainer);
   textInRecipeContainer.appendChild(recipeName);

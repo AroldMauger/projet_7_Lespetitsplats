@@ -181,13 +181,28 @@ header {
 }
 
 .clickable-card {
+    position: relative;
     display: inline-block;
     width: 380px;
     text-decoration: none;
     color:black;
     background-color: white;
     border-radius: 20px;
+}
 
+
+.time {
+    position: absolute;
+    background-color: #FFD15B;
+    height: 26px;
+    width: 63px;
+    border-radius: 15px;
+    right: 1rem;
+    top: 1rem;
+    font-family: 'Manrope' sans-serif;;
+    text-align: center;
+    font-size: 12px;
+    padding-block: 5px;
 }
 
 .recipe-image {
