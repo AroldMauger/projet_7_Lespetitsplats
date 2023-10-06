@@ -12,68 +12,49 @@ const buttonIngredients = document.querySelector(".ingredient-button");
 const buttonAppliances = document.querySelector(".appliance-button");
 const buttonUstensiles = document.querySelector(".ustensiles-button");
 
-const chevronDown = document.querySelector(".bi-chevron-down");
 const ingredientFilterInput = document.getElementById("search-ingredient"); // ici on vise l'input dans le HTML
 const applianceFilterInput = document.getElementById("search-appliance");
 const ustensileFilterInput = document.getElementById("search-ustensile");
 
+const chevronDownIng = buttonIngredients.querySelector(".bi-chevron-down");
+const chevronDownAppl = buttonAppliances.querySelector(".bi-chevron-down");
+const chevronDownUst = buttonUstensiles.querySelector(".bi-chevron-down");
+const filters = [ingredients, appliances, ustensiles];
+const buttons = [buttonIngredients, buttonAppliances, buttonUstensiles];
+const inputElements = [ingredientFilterInput, applianceFilterInput, ustensileFilterInput];
+const chevronDowns = [chevronDownIng, chevronDownAppl, chevronDownUst];
 
-// OUVERTURE - FERMETURE DU FILTRE INGREDIENT //
-buttonIngredients.addEventListener("click", function () {
-  if (ingredients.style.display === "none") {
-    ingredients.style.display = "block";
-    appliances.style.display = "none";
-    ustensiles.style.display = "none";
-    buttonIngredients.style.borderRadius = "15px 15px 0px 0px";
-    chevronDown.classList.add("rotate");
-  } else {
-    ingredients.style.display = "none";
-    chevronDown.classList.remove("rotate");
-    buttonIngredients.style.borderRadius = "15px 15px 15px 15px";
-    ingredientFilterInput.value = "";
-    closeButtonInSearch.forEach((btn) => {
-      btn.style.display = "none";
-    });
-  }
+function displayFiltersContent(filterIndex) {
+  filters.forEach((filter, index) => {
+    const button = buttons[index];
+    const input = inputElements[index];
+    const chevronDown = chevronDowns[index];
+
+    if (index === filterIndex) {
+      filter.style.display = filter.style.display === "none" ? "block" : "none";
+      button.style.borderRadius = "15px 15px 0px 0px";
+      input.value = "";
+      chevronDown.classList.add("rotate");
+    } else {
+      filter.style.display = "none";
+      button.style.borderRadius = "15px";
+      chevronDown.classList.remove("rotate");
+    }
+  });
+}
+
+buttonIngredients.addEventListener("click", function(){
+  displayFiltersContent(0);
 });
 
-// OUVERTURE - FERMETURE DU FILTRE APPAREILS //
-buttonAppliances.addEventListener("click", function () {
-  if (appliances.style.display === "none") {
-    appliances.style.display = "block";
-    ingredients.style.display = "none";
-    ustensiles.style.display = "none";
-    buttonAppliances.style.borderRadius = "15px 15px 0px 0px";
-    chevronDown.classList.add("rotate");
-  } else {
-    appliances.style.display = "none";
-    chevronDown.classList.remove("rotate");
-    buttonAppliances.style.borderRadius = "15px 15px 15px 15px";
-    applianceFilterInput.value = "";
-    closeButtonInSearch.forEach((btn) => {
-      btn.style.display = "none";
-    });
-  }
+buttonAppliances.addEventListener("click", function(){
+  displayFiltersContent(1);
 });
 
-// OUVERTURE - FERMETURE DU FILTRE USTENSILES //
-buttonUstensiles.addEventListener("click", function () {
-  if (ustensiles.style.display === "none") {
-    ustensiles.style.display = "block";
-    appliances.style.display = "none";
-    ingredients.style.display = "none";
-    buttonUstensiles.style.borderRadius = "15px 15px 0px 0px";
-    chevronDown.classList.add("rotate");
-  } else {
-    ustensiles.style.display = "none";
-    chevronDown.classList.remove("rotate");
-    buttonUstensiles.style.borderRadius = "15px 15px 15px 15px";
-    ustensileFilterInput.value = "";
-    closeButtonInSearch.forEach((btn) => {
-      btn.style.display = "none";
-    });
-  }
+buttonUstensiles.addEventListener("click", function (){
+  displayFiltersContent(2);
 });
+
 
 // --------------FONCTION POUR AFFICHER LES CONTENUS DE CHAQUE FILTRE  ------------//
 
