@@ -1,8 +1,9 @@
-import { generateTag } from "./tags.js";
 
 // OUVERTURE - FERMETURE DU FILTRE INGREDIENTS//
 
-const closeButtonInSearch = document.querySelectorAll(".close-in-search");
+const closeIngredients = document.querySelector(".close-ingredients");
+const closeAppliances = document.querySelector(".close-appliances");
+const closeUstensiles = document.querySelector(".close-ustensiles");
 
 const ingredients = document.querySelector(".ingredients");
 const appliances = document.querySelector(".appliances");
@@ -31,13 +32,19 @@ function displayFiltersContent(filterIndex) {
     const chevronDown = chevronDowns[index];
 
     if (index === filterIndex) {
-      filter.style.display = filter.style.display === "none" ? "block" : "none";
-      button.style.borderRadius = "15px 15px 0px 0px";
-      input.value = "";
-      chevronDown.classList.add("rotate");
+      if (filter.style.display === "block") {
+        filter.style.display = "none";
+        button.style.borderRadius = "15px 15px 15px 15px"; 
+        chevronDown.classList.remove("rotate"); 
+      } else {
+        filter.style.display = "block";
+        button.style.borderRadius = "15px 15px 0px 0px";
+        input.value = "";
+        chevronDown.classList.add("rotate");
+      }
     } else {
       filter.style.display = "none";
-      button.style.borderRadius = "15px";
+      button.style.borderRadius = "15px 15px 15px 15px";
       chevronDown.classList.remove("rotate");
     }
   });
@@ -58,7 +65,7 @@ buttonUstensiles.addEventListener("click", function (){
 
 // --------------FONCTION POUR AFFICHER LES CONTENUS DE CHAQUE FILTRE  ------------//
 
-export function displayItemsInFilter(item, importContainer, allTagsContainer) {
+export function displayItemsInFilter(item, importContainer) {
   const itemElement = document.createElement("span");
   itemElement.textContent = item;
   itemElement.classList.add("items-in-filter");
@@ -77,9 +84,7 @@ export function displayItemsInFilter(item, importContainer, allTagsContainer) {
 
   // CREATION D'UN TAG AU CLIC SUR UN ITEM
 
-  itemElement.addEventListener("click", function()  {
-    generateTag(item, allTagsContainer);
-  });
+
 
 }
 // ----------------------------------------------------------------- //
@@ -94,15 +99,13 @@ export function filterIngredientsFromInput() {
     const filterText = removeAccents(event.target.value.toLowerCase()); // ici, le texte qu'on écrit dans l'input sans accent
     // ToLowerCase() nous permet de comparer l'input et les ingrédients avec la même casse
     
-    ingredientItems.forEach((ingredientItem) => {
-      ingredientItem.addEventListener("click", function () {
-        // permet de supprimer le texte dans la barre de recherche
-        event.target.value = "";
+    if (event.target.value === "") {
+      closeIngredients.style.display = "none";
+    } else {
+      closeIngredients.style.display = "block";
+    }
 
-        closeButtonInSearch.forEach((closeBtn) => {
-          closeBtn.style.display = "none";
-        });
-      });
+    ingredientItems.forEach((ingredientItem) => {
 
       setTimeout(function () {
         const ingredientName = removeAccents(
@@ -126,16 +129,15 @@ export function filterAppliancesFromInput() {
 
   applianceFilterInput.addEventListener("input", (event) => {
     const filterText = removeAccents(event.target.value.toLowerCase()); // ici, le texte qu'on écrit dans l'input sans accent
-    // ToLowerCase() nous permet de comparer l'input et les appareils avec la même casse
-    items.forEach((item) => {
-      item.addEventListener("click", function () {
-        // permet de supprimer le texte dans la barre de recherche
-        event.target.value = "";
 
-        closeButtonInSearch.forEach((closeBtn) => {
-          closeBtn.style.display = "none";
-        });
-      });
+    if (event.target.value === "") {
+      closeAppliances.style.display = "none";
+    } else {
+      closeAppliances.style.display = "block";
+    }
+
+    items.forEach((item) => {
+     
       setTimeout(function () {
         const applianceName = removeAccents(item.textContent.toLowerCase()); // ici, l'appareil dans la liste sans accent
         if (applianceName.includes(filterText)) {
@@ -155,16 +157,15 @@ export function filterUstensilesFromInput() {
 
   ustensileFilterInput.addEventListener("input", (event) => {
     const filterText = removeAccents(event.target.value.toLowerCase()); // ici, le texte qu'on écrit dans l'input sans accent
-                                                                        // ToLowerCase() nous permet de comparer l'input et les ustensiles avec la même casse
-    items.forEach((item) => {
-      item.addEventListener("click", function () {
-        // permet de supprimer le texte dans la barre de recherche
-        event.target.value = "";
 
-        closeButtonInSearch.forEach((closeBtn) => {
-          closeBtn.style.display = "none";
-        });
-      });
+    if (event.target.value === "") {
+      closeUstensiles.style.display = "none";
+    } else {
+      closeUstensiles.style.display = "block";
+    }
+
+    items.forEach((item) => {
+     
       setTimeout(function () {
         const ustensileName = removeAccents(item.textContent.toLowerCase()); // ici, l'ustensile dans la liste sans accent
         if (ustensileName.includes(filterText)) {
@@ -178,28 +179,6 @@ export function filterUstensilesFromInput() {
 }
 
 // FONCTION POUR FAIRE APPARAITRE LA CROIX DANS LA BARRE DE RECHERCHE DE CHAQUE FILTRE //
-
-function displayCloseButtonInSearchByFilter(filterInput, closeButton) {
-  filterInput.addEventListener("input", function (event) {
-    if (event.target.value === "") {
-      closeButton.style.display = "none";
-    } else {
-      closeButton.style.display = "block";
-    }
-  });
-
-  closeButton.addEventListener("click", function () {
-    filterInput.value = "";
-
-    closeButtonInSearch.forEach((btn) => {
-      btn.style.display = "none";
-    });
-  });
-}
-
-displayCloseButtonInSearchByFilter(ingredientFilterInput, closeButtonInSearch[0]);
-displayCloseButtonInSearchByFilter(applianceFilterInput, closeButtonInSearch[1]);
-displayCloseButtonInSearchByFilter(ustensileFilterInput, closeButtonInSearch[2]);
 
 
 // FONCTION POUR NORMALISER LES CARACTERES RECHERCHÉS DANS L'INPUT SANS ACCENTS
@@ -216,3 +195,19 @@ export function filterItemsFromSearchInFilters () {
 }
 
 filterItemsFromSearchInFilters()
+
+
+closeIngredients.addEventListener("click", function () {
+  ingredientFilterInput.value = "";
+  closeIngredients.style.display = "none";
+});
+
+closeAppliances.addEventListener("click", function () {
+  applianceFilterInput.value = "";
+  closeAppliances.style.display = "none";
+});
+
+closeUstensiles.addEventListener("click", function () {
+  ustensileFilterInput.value = "";
+  closeUstensiles.style.display = "none";
+});
