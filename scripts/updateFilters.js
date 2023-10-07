@@ -2,6 +2,7 @@ import { displayItemsInFilter } from "./filters.js";
 import { uniqueIngredients, uniqueAppliances, uniqueUstensiles, hiddenAppliances, hiddenIngredients, hiddenUstensiles, searchRecipesFromIngredientTag, searchRecipesFromApplianceTag, searchRecipesFromUstensileTag } from "./search-fonctionnal.js";
 
 
+
 // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE INGREDIENT -------------- //
 export function updateIngredientFilter(searchResults) {
     const importContainer = document.querySelector(".import-ingredients");
@@ -24,10 +25,11 @@ export function updateIngredientFilter(searchResults) {
     const uniqueIngredientsArray = Array.from(uniqueIngredients);
     uniqueIngredientsArray.forEach((item) => {
       displayItemsInFilter(item, importContainer, allTagsIngredients);
-      searchRecipesFromIngredientTag(searchResults);
     });
+    searchRecipesFromIngredientTag(searchResults);
   }
-  
+
+
 
   // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE APPAREILS -------------- //
 export function updateApplianceFilter(searchResults) {
@@ -49,8 +51,9 @@ export function updateApplianceFilter(searchResults) {
     const uniqueAppliancesArray = Array.from(uniqueAppliances);
     uniqueAppliancesArray.forEach((item) => {
       displayItemsInFilter(item, importContainer, allTagsAppliances);
-      searchRecipesFromApplianceTag(searchResults);
     });
+    searchRecipesFromApplianceTag(searchResults);
+
   }
 
 
@@ -73,8 +76,9 @@ export function updateUstensileFilter(searchResults) {
     const uniqueUstensilesArray = Array.from(uniqueUstensiles);
     uniqueUstensilesArray.forEach((item) => {
       displayItemsInFilter(item, importContainer, allTagsUstensiles);
-      searchRecipesFromUstensileTag(searchResults);
     });
+    searchRecipesFromUstensileTag(searchResults);
+
   }
 
   // -----  FONCTION GÉNÉRIQUE POUR METTRE A JOUR TOUS LES ITEMS DANS LES FILTRES -------------- //

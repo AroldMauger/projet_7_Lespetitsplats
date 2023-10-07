@@ -1,4 +1,6 @@
 import { recipes } from "./recipes.js";
+import { generateTag } from "./tags.js";
+
 import { createRecipeCard } from "./main.js";
 import { updateFilters } from "./updateFilters.js";
 import { filterItemsFromSearchInFilters, filterIngredientsFromInput, filterAppliancesFromInput, filterUstensilesFromInput } from "./filters.js";
@@ -6,6 +8,19 @@ import { filterItemsFromSearchInFilters, filterIngredientsFromInput, filterAppli
 const cardContainer = document.querySelector(".cards-container");
 const searchInput = document.getElementById("search-recipe");
 const totalRecipes = document.querySelector(".total-recipes");
+
+const closeIngredients = document.querySelector(".close-ingredients");
+const closeAppliances = document.querySelector(".close-appliances");
+const closeUstensiles = document.querySelector(".close-ustensiles");
+
+const ingredientFilterInput = document.getElementById("search-ingredient");
+const applianceFilterInput = document.getElementById("search-appliance");
+const ustensileFilterInput = document.getElementById("search-ustensile");
+
+const allTagsIngredients = document.querySelector(".tags-ingredients");
+const allTagsAppliances= document.querySelector(".tags-appliances");
+const allTagsUstensiles= document.querySelector(".tags-ustensiles");
+
 
 let searchText = "";
 export let uniqueIngredients = new Set();
@@ -82,11 +97,16 @@ export function searchRecipesFromIngredientTag(searchResults) {
 
   itemsIngredients.forEach((itemIngredient) => {
     itemIngredient.addEventListener("click", function () {
+      
       const clickedIngredient = itemIngredient.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
+      generateTag(clickedIngredient, allTagsIngredients)
+
       uniqueTagsIngredients.add(clickedIngredient);
 
       hiddenIngredients.add(clickedIngredient);
       itemIngredient.style.display = "none";
+      closeIngredients.style.display = "none"
+      ingredientFilterInput.value = "";
 
       // On filtre les recettes qui contiennent l'ingrédient cliqué
       const filteredRecipes = searchResults.filter((recipe) => {
@@ -146,14 +166,15 @@ export function searchRecipesFromApplianceTag(searchResults) {
   itemsAppliances.forEach((itemAppliance) => {
     itemAppliance.addEventListener("click", function () {
       const clickedAppliance = itemAppliance.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
+      generateTag(clickedAppliance, allTagsAppliances)
 
       uniqueTagsAppliances.add(clickedAppliance);
 
       hiddenAppliances.add(clickedAppliance);
       itemAppliance.style.display = "none";
-
+      closeAppliances.style.display = "none"
+      applianceFilterInput.value = "";
    
-
       // On filtre les recettes qui contiennent l'ingrédient cliqué
       const filteredRecipes = searchResults.filter((recipe) => {
         return recipe.appliance.toLowerCase().includes(clickedAppliance);
@@ -206,10 +227,14 @@ export function searchRecipesFromUstensileTag(searchResults) {
   itemsUstensiles.forEach((itemUstensile) => {
     itemUstensile.addEventListener("click", function () {
       const clickedUstensile = itemUstensile.textContent.toLowerCase(); // On récupère le texte de l'élément cliqué en minuscules
+      generateTag(clickedUstensile, allTagsUstensiles)
+
       uniqueTagsUstensiles.add(clickedUstensile);
 
       hiddenUstensiles.add(clickedUstensile);
       itemUstensile.style.display = "none";
+      closeUstensiles.style.display = "none"
+      ustensileFilterInput.value = "";
 
 
       // On filtre les recettes qui contiennent l'ingrédient cliqué
@@ -320,3 +345,6 @@ searchRecipesFromApplianceTag(recipes);
 searchRecipesFromUstensileTag(recipes);
 
 updateFilters(recipes)
+
+
+
