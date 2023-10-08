@@ -1,6 +1,7 @@
 import { searchRecipesFromDeletedIngredientTag, searchRecipesFromDeletedApplianceTag, searchRecipesFromDeletedUstensileTag, 
   uniqueTagsIngredients, uniqueIngredients, uniqueTagsAppliances, uniqueAppliances, uniqueTagsUstensiles, uniqueUstensiles } from "./search-fonctionnal.js";
 
+// FONCTION POUR GÉNÉRER LES TAGS AVEC FOND JAUNE //
 export function generateTag(item, allTagsContainer) {
 
     const tagContainer = document.createElement("div");
@@ -14,14 +15,13 @@ export function generateTag(item, allTagsContainer) {
     closeTag.classList.add("bi-x-lg");
     closeTag.classList.add("close-tag-button");
   
+    // quand on clique sur la croix pour supprimer un tag, on appelle la fonction de recherche des recettes qui correspond //
     closeTag.addEventListener("click", function () {
-      tagContainer.remove()
+      tagContainer.remove()                                 // efface le tag
       if(uniqueTagsIngredients.size > 0) {
-        uniqueTagsIngredients.delete(item.toLowerCase());
-        uniqueIngredients.delete(item.toLowerCase());
-        
-        searchRecipesFromDeletedIngredientTag(item); 
-        console.log(uniqueTagsIngredients)
+        uniqueTagsIngredients.delete(item.toLowerCase());   // actualisation du set uniqueTagsIngredients
+        uniqueIngredients.delete(item.toLowerCase());       // actualisation du set uniqueIngredients
+        searchRecipesFromDeletedIngredientTag(item);        // appel de la fonction de recherche des recettes à partir de suppression de tag
     
       } if(uniqueTagsAppliances.size > 0) {
         uniqueTagsAppliances.delete(item.toLowerCase());
@@ -33,9 +33,7 @@ export function generateTag(item, allTagsContainer) {
         uniqueUstensiles.delete(item.toLowerCase());
         searchRecipesFromDeletedUstensileTag(item)
       }
-     
     });
-  
     tagContainer.appendChild(tagName);
     tagContainer.appendChild(closeTag);
     allTagsContainer.appendChild(tagContainer);

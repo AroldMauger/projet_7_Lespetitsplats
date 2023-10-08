@@ -4,13 +4,13 @@ import { recipes } from "./recipes.js";
 export function displayAllRecipes() {
   const cardContainer = document.querySelector(".cards-container");
 
-  recipes.forEach((recipe) => {
+  recipes.forEach((recipe) => {                      
     const clickableCard = createRecipeCard(recipe);
     cardContainer.appendChild(clickableCard);
   });
 
   const totalRecipes = document.querySelector(".total-recipes");
-  totalRecipes.textContent = recipes.length + " recettes"
+  totalRecipes.textContent = recipes.length + " recettes"           // affichage du nombre total de recettes
 }
 // --------------------------------------------//
 
@@ -62,6 +62,7 @@ export function createRecipeCard(recipe) {
     const quantity = document.createElement("span");
     quantity.classList.add("quantity");
 
+    // gestion de l'affichage des quantités lorsque "unit" est défini
     if (ingredientList.quantity != null && ingredientList.unit != null) {
       quantity.textContent = `${ingredientList.quantity} ${ingredientList.unit}`;
     } else {
@@ -84,8 +85,5 @@ export function createRecipeCard(recipe) {
 
   return clickableCard;
 }
-// --------------------------------------------//
-
-
 
 displayAllRecipes();

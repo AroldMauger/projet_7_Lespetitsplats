@@ -1,6 +1,4 @@
-
-// OUVERTURE - FERMETURE DU FILTRE INGREDIENTS//
-
+// DÉCLARATION DES VARIABLES //
 const closeIngredients = document.querySelector(".close-ingredients");
 const closeAppliances = document.querySelector(".close-appliances");
 const closeUstensiles = document.querySelector(".close-ustensiles");
@@ -13,7 +11,7 @@ const buttonIngredients = document.querySelector(".ingredient-button");
 const buttonAppliances = document.querySelector(".appliance-button");
 const buttonUstensiles = document.querySelector(".ustensiles-button");
 
-const ingredientFilterInput = document.getElementById("search-ingredient"); // ici on vise l'input dans le HTML
+const ingredientFilterInput = document.getElementById("search-ingredient"); 
 const applianceFilterInput = document.getElementById("search-appliance");
 const ustensileFilterInput = document.getElementById("search-ustensile");
 
@@ -24,6 +22,8 @@ const filters = [ingredients, appliances, ustensiles];
 const buttons = [buttonIngredients, buttonAppliances, buttonUstensiles];
 const inputElements = [ingredientFilterInput, applianceFilterInput, ustensileFilterInput];
 const chevronDowns = [chevronDownIng, chevronDownAppl, chevronDownUst];
+
+// FONCTION POUR L'OUVERTURE ET FERMETURE DES FILTRES //
 
 function displayFiltersContent(filterIndex) {
   filters.forEach((filter, index) => {
@@ -72,8 +72,7 @@ export function displayItemsInFilter(item, importContainer) {
 
   importContainer.appendChild(itemElement);
 
-  // GESTION DU SURVOL ET FOND JAUNE
-
+  // Gestion du survol sur fond jaune
   itemElement.addEventListener("mouseover", () => {
     itemElement.style.backgroundColor = "#FFD15B";
   });
@@ -81,37 +80,26 @@ export function displayItemsInFilter(item, importContainer) {
   itemElement.addEventListener("mouseout", () => {
     itemElement.style.backgroundColor = "transparent";
   });
-
-  // CREATION D'UN TAG AU CLIC SUR UN ITEM
-
-
-
 }
-// ----------------------------------------------------------------- //
-
 
 // FONCTION POUR FILTRER LES NOMS DES INGREDIENTS EN FONCTION DE CE QU'ECRIT L'UTILISATEUR DANS LA BARRE DE RECHERCHE
 export function filterIngredientsFromInput() {
-  const ingredientFilterInput = document.getElementById("search-ingredient"); // ici on vise l'input dans le HTML
+  const ingredientFilterInput = document.getElementById("search-ingredient"); 
   const ingredientItems = document.querySelectorAll(".items-in-filter");
 
   ingredientFilterInput.addEventListener("input", (event) => {
     const filterText = removeAccents(event.target.value.toLowerCase()); // ici, le texte qu'on écrit dans l'input sans accent
-    // ToLowerCase() nous permet de comparer l'input et les ingrédients avec la même casse
-    
+    // Si aucune valeur dans la barre de recherche du filtre
     if (event.target.value === "") {
       closeIngredients.style.display = "none";
     } else {
       closeIngredients.style.display = "block";
     }
-
+    // Pour chaque items dans les filtres
     ingredientItems.forEach((ingredientItem) => {
-
       setTimeout(function () {
-        const ingredientName = removeAccents(
-          ingredientItem.textContent.toLowerCase()
-        ); // ici, l'ingrédient dans la liste sans accent
-        if (ingredientName.includes(filterText)) {
+        const ingredientName = removeAccents(ingredientItem.textContent.toLowerCase()); // ici, l'ingrédient dans la liste sans accent en minuscules
+        if (ingredientName.includes(filterText)) {                   // Si ce qu'écrit l'utilisateur correspond au nom d'un item
           ingredientItem.style.display = "block";
         } else {
           ingredientItem.style.display = "none";
@@ -124,7 +112,7 @@ export function filterIngredientsFromInput() {
 
 // FONCTION POUR FILTRER LES NOMS DES APPAREILS EN FONCTION DE CE QU'ECRIT L'UTILISATEUR DANS LA BARRE DE RECHERCHE
 export function filterAppliancesFromInput() {
-  const applianceFilterInput = document.getElementById("search-appliance"); // ici on vise l'input dans le HTML
+  const applianceFilterInput = document.getElementById("search-appliance"); 
   const items = document.querySelectorAll(".items-in-filter");
 
   applianceFilterInput.addEventListener("input", (event) => {
@@ -139,7 +127,7 @@ export function filterAppliancesFromInput() {
     items.forEach((item) => {
      
       setTimeout(function () {
-        const applianceName = removeAccents(item.textContent.toLowerCase()); // ici, l'appareil dans la liste sans accent
+        const applianceName = removeAccents(item.textContent.toLowerCase()); // ici, l'appareil dans la liste sans accent en minuscules
         if (applianceName.includes(filterText)) {
           item.style.display = "block";
         } else {
@@ -152,7 +140,7 @@ export function filterAppliancesFromInput() {
 
 // FONCTION POUR FILTRER LES NOMS DES USTENSILES EN FONCTION DE CE QU'ECRIT L'UTILISATEUR DANS LA BARRE DE RECHERCHE
 export function filterUstensilesFromInput() {
-  const ustensileFilterInput = document.getElementById("search-ustensile"); // ici on vise l'input dans le HTML
+  const ustensileFilterInput = document.getElementById("search-ustensile"); 
   const items = document.querySelectorAll(".items-in-filter");
 
   ustensileFilterInput.addEventListener("input", (event) => {
@@ -163,11 +151,9 @@ export function filterUstensilesFromInput() {
     } else {
       closeUstensiles.style.display = "block";
     }
-
     items.forEach((item) => {
-     
       setTimeout(function () {
-        const ustensileName = removeAccents(item.textContent.toLowerCase()); // ici, l'ustensile dans la liste sans accent
+        const ustensileName = removeAccents(item.textContent.toLowerCase()); // ici, l'ustensile dans la liste sans accent en minuscules
         if (ustensileName.includes(filterText)) {
           item.style.display = "block";
         } else {
@@ -178,8 +164,6 @@ export function filterUstensilesFromInput() {
   });
 }
 
-// FONCTION POUR FAIRE APPARAITRE LA CROIX DANS LA BARRE DE RECHERCHE DE CHAQUE FILTRE //
-
 
 // FONCTION POUR NORMALISER LES CARACTERES RECHERCHÉS DANS L'INPUT SANS ACCENTS
 export function removeAccents(str) {
@@ -187,7 +171,6 @@ export function removeAccents(str) {
 }
 
 // Fonction générique pour permettre le filtre à partir du texte dans la barre de recherche des filtres
-
 export function filterItemsFromSearchInFilters () {
   filterIngredientsFromInput()
   filterAppliancesFromInput()
@@ -196,7 +179,7 @@ export function filterItemsFromSearchInFilters () {
 
 filterItemsFromSearchInFilters()
 
-
+// Gestion de la disparition de la croix dans la barre de recherche des filtres //
 closeIngredients.addEventListener("click", function () {
   ingredientFilterInput.value = "";
   closeIngredients.style.display = "none";

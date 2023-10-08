@@ -7,28 +7,27 @@ import { uniqueIngredients, uniqueAppliances, uniqueUstensiles, hiddenAppliances
 export function updateIngredientFilter(searchResults) {
     const importContainer = document.querySelector(".import-ingredients");
     const allTagsIngredients = document.querySelector(".tags-ingredients");
-  
-    importContainer.innerHTML = "";
 
-    uniqueIngredients.clear(); 
+    importContainer.innerHTML = "";         // on efface tous les items du filtre
+    uniqueIngredients.clear();              // on efface le set uniqueIngredients
   
     searchResults.forEach((recipe) => {
       recipe.ingredients.forEach((ingredientList) => {
         const ingredientName = ingredientList.ingredient.toLowerCase();
   
-        if (!hiddenIngredients.has(ingredientName)) {
-          uniqueIngredients.add(ingredientName);
-        } 
+        if (!hiddenIngredients.has(ingredientName)) {  // le set hiddenIngredients contient les ingrédients cliqués auparavant
+          uniqueIngredients.add(ingredientName);        // uniqueIngredients doit toujours contenir tous les ingrédients des recettes affichés
+        }                                               
       });
     });
-  
+  //  c'est à partir du set uniqueIngredients que les items sont créées dans le filtre ingrédient
     const uniqueIngredientsArray = Array.from(uniqueIngredients);
     uniqueIngredientsArray.forEach((item) => {
       displayItemsInFilter(item, importContainer, allTagsIngredients);
     });
+  //  appel de la fonction qui affiche les recettes en fonction des tags ingrédients
     searchRecipesFromIngredientTag(searchResults);
   }
-
 
 
   // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE APPAREILS -------------- //
@@ -37,7 +36,6 @@ export function updateApplianceFilter(searchResults) {
     const allTagsAppliances = document.querySelector(".tags-appliances");
   
     importContainer.innerHTML = "";
-  
     uniqueAppliances.clear(); 
   
     searchResults.forEach((recipe) => {
@@ -53,14 +51,13 @@ export function updateApplianceFilter(searchResults) {
       displayItemsInFilter(item, importContainer, allTagsAppliances);
     });
     searchRecipesFromApplianceTag(searchResults);
-
   }
-
 
   // -----  FONCTION POUR METTRE A JOUR LES ITEMS DANS LE FILTRE USTENSILE -------------- //
 export function updateUstensileFilter(searchResults) {
     const importContainer = document.querySelector(".import-ustensiles");
     const allTagsUstensiles = document.querySelector(".tags-ustensiles");
+    
     importContainer.innerHTML = "";
     uniqueUstensiles.clear(); 
   
@@ -78,7 +75,6 @@ export function updateUstensileFilter(searchResults) {
       displayItemsInFilter(item, importContainer, allTagsUstensiles);
     });
     searchRecipesFromUstensileTag(searchResults);
-
   }
 
   // -----  FONCTION GÉNÉRIQUE POUR METTRE A JOUR TOUS LES ITEMS DANS LES FILTRES -------------- //
