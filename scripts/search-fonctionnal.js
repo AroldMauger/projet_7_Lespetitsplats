@@ -36,9 +36,12 @@ export let uniqueTagsUstensiles = new Set();
 export let hiddenUstensiles = new Set();
 
 // Gestion de l'événement sur la barre de recherche principale //
-searchInput.addEventListener("input", function () {
+searchInput.addEventListener("input", function (event) {
   searchText = searchInput.value.toLowerCase();
   setTimeout(function () {
+    if(searchInput.value.toLowerCase() !== event.target.value.toLowerCase()) {
+      return
+    }
     if (searchText.length >= 3) {           // si le texte écrit a 3 caractères ou plus
       cardContainer.innerHTML = "";         // on efface les recettes
       searchRecipes();                      // on appelle la fonction de recherche par mot clé dans nom/ingrédients/description
