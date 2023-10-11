@@ -125,7 +125,7 @@ header {
     padding-left: 17px;
     padding-block: 13px;
     font-family: 'Manrope', sans-serif;
-
+    cursor: pointer;
 }
 
 /* TAGS */
@@ -272,3 +272,9 @@ header {
     font-weight: 400;
 }
 
+.error-message {
+    font-size: 25px; 
+    margin-left:100px; 
+    padding-bottom:150px;
+    color: darkred;
+}

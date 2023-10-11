@@ -3,7 +3,7 @@ import { generateTag } from "./tags.js";
 
 import { createRecipeCard } from "./main.js";
 import { updateFilters } from "./updateFilters.js";
-import { filterItemsFromSearchInFilters, filterIngredientsFromInput, filterAppliancesFromInput, filterUstensilesFromInput } from "./filters.js";
+import { filterItemsFromSearchInFilters, filterIngredientsFromInput, filterAppliancesFromInput, filterUstensilesFromInput, removeAccents } from "./filters.js";
 
 const cardContainer = document.querySelector(".cards-container");
 const searchInput = document.getElementById("search-recipe");
@@ -36,7 +36,7 @@ export let uniqueTagsUstensiles = new Set();
 export let hiddenUstensiles = new Set();
 
 searchInput.addEventListener("input", function () {
-  searchText = searchInput.value.toLowerCase();
+  searchText = removeAccents(searchInput.value.toLowerCase());
   setTimeout(function () {
     if (searchText.length >= 3) {
       cardContainer.innerHTML = "";
@@ -65,12 +65,12 @@ export function searchRecipes() {
     }
     let searchMatch = false;
 
-    if (recipeName.toLowerCase().includes(searchText) ||recipeDescription.toLowerCase().includes(searchText)) {
+    if (removeAccents(recipeName.toLowerCase()).includes(searchText) ||removeAccents(recipeDescription.toLowerCase()).includes(searchText)) {
       searchMatch = true;
     }
 
     for (let k = 0; k < ingredientsNameArray.length; k++) {
-      const ingredientName = ingredientsNameArray[k].toLowerCase();
+      const ingredientName = removeAccents(ingredientsNameArray[k].toLowerCase());
       if (ingredientName.includes(searchText)) {
         searchMatch = true;
       }
@@ -85,7 +85,7 @@ export function searchRecipes() {
 
   cardContainer.innerHTML = ""; // On efface les recettes affichées par défaut
   if (searchResults.length === 0) {
-    cardContainer.innerHTML = `<span style="font-size: 25px; margin-left:100px; padding-bottom:150px;color: darkred;">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
+    cardContainer.innerHTML = `<span class="error-message">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
   }
   if (searchResults.length > 0) {
 
