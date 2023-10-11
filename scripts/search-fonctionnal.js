@@ -3,7 +3,7 @@ import { generateTag } from "./tags.js";
 
 import { createRecipeCard } from "./main.js";
 import { updateFilters } from "./updateFilters.js";
-import { filterItemsFromSearchInFilters, filterIngredientsFromInput, filterAppliancesFromInput, filterUstensilesFromInput } from "./filters.js";
+import { filterItemsFromSearchInFilters, filterIngredientsFromInput, filterAppliancesFromInput, filterUstensilesFromInput, removeAccents } from "./filters.js";
 
 const cardContainer = document.querySelector(".cards-container");
 const searchInput = document.getElementById("search-recipe");
@@ -37,11 +37,8 @@ export let hiddenUstensiles = new Set();
 
 // Gestion de l'événement sur la barre de recherche principale //
 searchInput.addEventListener("input", function (event) {
-  searchText = searchInput.value.toLowerCase();
+  searchText = removeAccents(searchInput.value.toLowerCase());
   setTimeout(function () {
-    if(searchInput.value.toLowerCase() !== event.target.value.toLowerCase()) {
-      return
-    }
     if (searchText.length >= 3) {           // si le texte écrit a 3 caractères ou plus
       cardContainer.innerHTML = "";         // on efface les recettes
       searchRecipes();                      // on appelle la fonction de recherche par mot clé dans nom/ingrédients/description
@@ -57,10 +54,10 @@ searchInput.addEventListener("input", function (event) {
 // ------- -FONCTION POUR FILTRER LES RECETTES EN FONCTION DU TEXTE DANS LA BARRE DE RECHERCHE --------- //
 export function searchRecipes() {
     const searchResults = recipes.filter((recipe) => {              
-        const recipeName = recipe.name.toLowerCase();                   // la variable pour le nom de chaque recette
-        const recipeDescription = recipe.description.toLowerCase();      // la variable pour la description de chaque recette
+        const recipeName = removeAccents(recipe.name.toLowerCase());                   // la variable pour le nom de chaque recette
+        const recipeDescription = removeAccents(recipe.description.toLowerCase());      // la variable pour la description de chaque recette
         const ingredientNames = recipe.ingredients.map((ingredient) =>    // la variable pour les ingrédients de chaque recette
-          ingredient.ingredient.toLowerCase()                             // map nous renvoie une liste des ingrédients pour chaque recette
+        removeAccents(ingredient.ingredient.toLowerCase())                             // map nous renvoie une liste des ingrédients pour chaque recette
         );
     
         return (
@@ -73,7 +70,7 @@ export function searchRecipes() {
   cardContainer.innerHTML = "";         // On efface les recettes affichées par défaut
   // Si aucune recette n'est trouvée, alors on affiche un message d'erreur
   if (searchResults.length === 0) {
-    cardContainer.innerHTML = `<span style="font-size: 25px; margin-left:100px; padding-bottom:150px;color: darkred;">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
+    cardContainer.innerHTML = `<span class="error-message">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
   }
   // Si des recettes ont été trouvées
   if (searchResults.length > 0) {
