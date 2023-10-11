@@ -43,6 +43,7 @@ searchInput.addEventListener("input", function (event) {
       cardContainer.innerHTML = "";         // on efface les recettes
       searchRecipes();                      // on appelle la fonction de recherche par mot clé dans nom/ingrédients/description
       filterItemsFromSearchInFilters();     // on appelle la fonction qui permet d'afficher les items dans les filtres
+      searchByTags();
     }
     if (searchText === "") {                // si le texte dans la barre de recherche est effacé et redevient nul
       cardContainer.innerHTML = "";         // on efface les recettes
