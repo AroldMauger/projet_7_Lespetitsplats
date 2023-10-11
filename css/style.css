@@ -106,6 +106,10 @@ header {
     font-family: 'Manrope', sans-serif;
 }
 
+.input-search-filter::-webkit-search-cancel-button {
+    display: none;
+}
+
 .import {
     height:250px;
 }

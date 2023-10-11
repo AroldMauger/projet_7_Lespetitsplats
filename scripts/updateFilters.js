@@ -1,4 +1,4 @@
-import { displayItemsInFilter } from "./filters.js";
+import { displayItemsInFilter, filterItemsFromSearchInFilters } from "./filters.js";
 import { uniqueIngredients, uniqueAppliances, uniqueUstensiles, hiddenAppliances, hiddenIngredients, hiddenUstensiles, searchRecipesFromIngredientTag, searchRecipesFromApplianceTag, searchRecipesFromUstensileTag } from "./search-fonctionnal.js";
 
 
@@ -83,4 +83,5 @@ export function updateUstensileFilter(searchResults) {
     updateIngredientFilter(recipes, searchResults, filteredRecipes)
     updateApplianceFilter(recipes, searchResults, filteredRecipes)
     updateUstensileFilter(recipes, searchResults, filteredRecipes)
+    filterItemsFromSearchInFilters()
   }

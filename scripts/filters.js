@@ -172,9 +172,9 @@ export function removeAccents(str) {
 
 // Fonction générique pour permettre le filtre à partir du texte dans la barre de recherche des filtres
 export function filterItemsFromSearchInFilters () {
-  filterIngredientsFromInput()
-  filterAppliancesFromInput()
-  filterUstensilesFromInput()
+  filterIngredientsFromInput();
+  filterAppliancesFromInput();
+  filterUstensilesFromInput();
 }
 
 filterItemsFromSearchInFilters()
