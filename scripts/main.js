@@ -4,10 +4,11 @@ import { recipes } from "./recipes.js";
 export function displayAllRecipes() {
   const cardContainer = document.querySelector(".cards-container");
 
-  recipes.forEach((recipe) => {
+  for (let i = 0; i < recipes.length; i++) {
+  const recipe = recipes[i];
     const clickableCard = createRecipeCard(recipe);
     cardContainer.appendChild(clickableCard);
-  });
+  };
 
   const totalRecipes = document.querySelector(".total-recipes");
   totalRecipes.textContent = recipes.length + " recettes"
@@ -51,7 +52,9 @@ export function createRecipeCard(recipe) {
 
   const ingredientLists = recipe.ingredients;
 
-  ingredientLists.forEach((ingredientList) => {
+  for (let i = 0; i < ingredientLists.length; i++) {
+    const ingredientList = ingredientLists[i];
+    
     const ingredientAndQuantity = document.createElement("div");
     ingredientAndQuantity.classList.add("ingredient-and-quantity");
 
@@ -71,7 +74,7 @@ export function createRecipeCard(recipe) {
     ingredientsContainer.appendChild(ingredientAndQuantity);
     ingredientAndQuantity.appendChild(ingredientName);
     ingredientAndQuantity.appendChild(quantity);
-  });
+  };
 
   clickableCard.appendChild(timeRecipe);
   clickableCard.appendChild(recipeImage);

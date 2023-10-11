@@ -26,7 +26,9 @@ const inputElements = [ingredientFilterInput, applianceFilterInput, ustensileFil
 const chevronDowns = [chevronDownIng, chevronDownAppl, chevronDownUst];
 
 function displayFiltersContent(filterIndex) {
-  filters.forEach((filter, index) => {
+  
+  for (let index = 0; index < filters.length; index++) {
+    const filter = filters[index];
     const button = buttons[index];
     const input = inputElements[index];
     const chevronDown = chevronDowns[index];
@@ -34,8 +36,8 @@ function displayFiltersContent(filterIndex) {
     if (index === filterIndex) {
       if (filter.style.display === "block") {
         filter.style.display = "none";
-        button.style.borderRadius = "15px 15px 15px 15px"; 
-        chevronDown.classList.remove("rotate"); 
+        button.style.borderRadius = "15px 15px 15px 15px";
+        chevronDown.classList.remove("rotate");
       } else {
         filter.style.display = "block";
         button.style.borderRadius = "15px 15px 0px 0px";
@@ -47,7 +49,8 @@ function displayFiltersContent(filterIndex) {
       button.style.borderRadius = "15px 15px 15px 15px";
       chevronDown.classList.remove("rotate");
     }
-  });
+}
+
 }
 
 buttonIngredients.addEventListener("click", function(){
@@ -105,8 +108,8 @@ export function filterIngredientsFromInput() {
       closeIngredients.style.display = "block";
     }
 
-    ingredientItems.forEach((ingredientItem) => {
-
+    for (let i = 0; i < ingredientItems.length; i++) {
+      const ingredientItem = ingredientItems[i];
       setTimeout(function () {
         const ingredientName = removeAccents(
           ingredientItem.textContent.toLowerCase()
@@ -117,7 +120,7 @@ export function filterIngredientsFromInput() {
           ingredientItem.style.display = "none";
         }
       }, 300);
-    });
+    };
   });
 
 }
@@ -136,8 +139,8 @@ export function filterAppliancesFromInput() {
       closeAppliances.style.display = "block";
     }
 
-    items.forEach((item) => {
-     
+ for (let i = 0; i < items.length; i++) {
+      const item = items[i];     
       setTimeout(function () {
         const applianceName = removeAccents(item.textContent.toLowerCase()); // ici, l'appareil dans la liste sans accent
         if (applianceName.includes(filterText)) {
@@ -146,7 +149,7 @@ export function filterAppliancesFromInput() {
           item.style.display = "none";
         }
       }, 300);
-    });
+    };
   });
 }
 
@@ -164,7 +167,8 @@ export function filterUstensilesFromInput() {
       closeUstensiles.style.display = "block";
     }
 
-    items.forEach((item) => {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
      
       setTimeout(function () {
         const ustensileName = removeAccents(item.textContent.toLowerCase()); // ici, l'ustensile dans la liste sans accent
@@ -174,7 +178,7 @@ export function filterUstensilesFromInput() {
           item.style.display = "none";
         }
       }, 300);
-    });
+    };
   });
 }
 
