@@ -85,9 +85,7 @@ export function searchRecipes() {
   }
 
   cardContainer.innerHTML = ""; // On efface les recettes affichées par défaut
-  if (searchResults.length === 0) {
-    cardContainer.innerHTML = `<span class="error-message">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
-  }
+ 
   if (searchResults.length > 0) {
 
     // Si des recettes ont été trouvées
@@ -401,7 +399,9 @@ function searchByTags() {
       filteredRecipes.push(recipe);
     }
   }
-
+  if (filteredRecipes.length === 0) {
+    cardContainer.innerHTML = `<span class="error-message">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
+  }
   for (let i = 0; i < filteredRecipes.length; i++) {
     const recipe = filteredRecipes[i];
     const clickableCard = createRecipeCard(recipe);
