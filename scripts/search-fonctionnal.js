@@ -69,10 +69,7 @@ export function searchRecipes() {
       });
 
   cardContainer.innerHTML = "";         // On efface les recettes affichées par défaut
-  // Si aucune recette n'est trouvée, alors on affiche un message d'erreur
-  if (searchResults.length === 0) {
-    cardContainer.innerHTML = `<span class="error-message">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
-  }
+
   // Si des recettes ont été trouvées
   if (searchResults.length > 0) {
     searchResults.forEach((recipe) => {
@@ -326,7 +323,9 @@ function searchByTags() {
 
     return ( matchesText && containsTabAppliance && containsTagIngredient && containsTagUstensile );
   });
-
+  if (filteredRecipes.length === 0) {
+    cardContainer.innerHTML = `<span class="error-message">Aucune recette ne contient '${searchText}', vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
+  }
   filteredRecipes.forEach((recipe) => {
     const clickableCard = createRecipeCard(recipe);
     cardContainer.appendChild(clickableCard);
