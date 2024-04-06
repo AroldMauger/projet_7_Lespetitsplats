@@ -4,7 +4,7 @@ main {
 
 }
 header {
-    background-image: url(/assets/logo/main-screen-image.jpg);
+    background-image: url(main-screen-image.jpg);
     object-fit: cover;
     height: 670px;
     background-position: center;
