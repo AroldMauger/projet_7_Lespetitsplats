@@ -4,7 +4,7 @@ main {
 
 }
 header {
-    background-image: url(/assets/logo/mainscreen.jpg);
+    background-image: url(/projet_7_Lespetitsplats/assets/logo/mainscreen.jpg);
     object-fit: cover;
     height: 670px;
     background-position: center;
